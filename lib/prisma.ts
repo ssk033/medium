@@ -10,7 +10,7 @@ export const prisma =
     log: ["error", "warn"],
     datasources: {
       db: {
-        url: process.env.DATABASE_URL + "&pgbouncer=true", // ✅ no env change
+        url: process.env.DATABASE_URL + "&pgbouncer=true", 
       },
     },
   });
