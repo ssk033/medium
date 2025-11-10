@@ -11,77 +11,52 @@ export default function SignupPage() {
     const grid = gridRef.current;
     if (!grid) return;
 
-    const handleHover = (e: MouseEvent) => {
-      const randomColor = `hsl(${Math.random() * 360}, 100%, 55%)`; // Neon color
-      const target = e.target as HTMLElement;
+    const cells = grid.querySelectorAll(".cell");
 
-      if (target.classList.contains("cell")) {
-        target.style.backgroundColor = randomColor;
-        target.style.boxShadow = `
-          0px 0px 35px ${randomColor},
-          0px 0px 90px ${randomColor},
-          inset 0 0 25px ${randomColor}
-        `;
+    cells.forEach((cell) => {
+      cell.addEventListener("mousemove", () => {
+        const randomColor = `hsl(${Math.random() * 360}, 100%, 55%)`;
+
+        cell.setAttribute(
+          "style",
+          `
+            background-color: ${randomColor};
+            box-shadow:
+              0 0 10px ${randomColor},
+              0 0 25px ${randomColor},
+              inset 0 0 15px ${randomColor};
+          `
+        );
 
         setTimeout(() => {
-          target.style.backgroundColor = "transparent";
-          target.style.boxShadow = "none";
-        }, 300);
-      }
-    };
-
-    grid.addEventListener("mousemove", handleHover);
-    return () => grid.removeEventListener("mousemove", handleHover);
+          cell.removeAttribute("style");
+        }, 350);
+      });
+    });
   }, []);
 
   return (
-    <div className="flex h-screen bg-black text-white overflow-hidden">
+    <main className="relative h-screen w-screen bg-black overflow-hidden flex items-center justify-center">
 
-      {/* ✅ LEFT SIDE FORM */}
-      <div className="w-1/2 flex items-center justify-center border-r border-gray-700">
-        <Signup /> {/* <-- yeh updated Signup component render karega */}
-      </div>
-
-      {/* ✅ RIGHT GRID PANEL */}
-      <div className="relative w-1/2 flex items-center justify-center">
-
-        {/* 🔥 Neon Animated Grid */}
-        <div
-          ref={gridRef}
-          className="absolute inset-0 grid grid-cols-12 grid-rows-12 opacity-70"
-        >
-          {Array.from({ length: 144 }).map((_, i) => (
-            <div
-              key={i}
-              className="cell border border-white/25 transition-all duration-75"
-            ></div>
-          ))}
-        </div>
-
-        {/* ✅ Neon Logo + Text */}
-        <div className="z-10 flex flex-col items-center gap-5 select-none">
-
-          <Image
-            src="/icons/writing-svgrepo-com.svg"
-            alt="writing logo"
-            width={120}
-            height={120}
-            className="drop-shadow-[0_0_35px_white] transition duration-300 hover:scale-110 hover:drop-shadow-[0_0_80px_white]"
+      {/* ✅ Neon Grid Background — Symmetric */}
+      <div
+        ref={gridRef}
+        className="absolute inset-0 grid grid-cols-[repeat(18,minmax(0,1fr))] grid-rows-[repeat(12,minmax(0,1fr))]"
+      >
+        {Array.from({ length: 216 }).map((_, i) => (
+          <div
+            key={i}
+            className="cell border border-white/10 transition-all duration-75"
           />
-
-          <h1
-            className="
-              text-7xl font-black italic tracking-wide text-center
-              drop-shadow-[0_0_30px_white]
-              transition-all duration-300
-              hover:drop-shadow-[0_0_60px_white]
-              hover:tracking-widest hover:scale-110
-            "
-          >
-            Create <br /> Your Own Story
-          </h1>
-        </div>
+        ))}
       </div>
-    </div>
+
+      {/* ✅ Center Signup Card */}
+   
+               <Signup />
+      
+       
+       
+    </main>
   );
 }
