@@ -3,7 +3,7 @@ import ProfileSidebar from "@/components/ProfileSidebar";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
