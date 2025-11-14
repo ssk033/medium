@@ -11,9 +11,12 @@ const genUsername = (name: string) =>
   name.replace(/\s+/g, "").toLowerCase() +
   Math.floor(1000 + Math.random() * 9000);
 
+// Determine if we're in production based on NEXTAUTH_URL
+const isProduction = process.env.NEXTAUTH_URL?.startsWith("https://") ?? false;
+
 export const authOptions: NextAuthOptions = {
-  // ⭐ Cookie settings - set useSecureCookies based on environment
-  useSecureCookies: process.env.NODE_ENV === "production",
+  // ⭐ Cookie settings - use secure cookies for HTTPS (production)
+  useSecureCookies: isProduction,
 
   // ⭐ Cookie configuration for authentication
   cookies: {
@@ -23,7 +26,7 @@ export const authOptions: NextAuthOptions = {
         httpOnly: true,
         sameSite: "lax",
         path: "/",
-        secure: process.env.NODE_ENV === "production", // true for production (HTTPS), false for localhost
+        secure: isProduction, // true for HTTPS (production), false for localhost
       },
     },
     callbackUrl: {
@@ -31,7 +34,7 @@ export const authOptions: NextAuthOptions = {
       options: { 
         sameSite: "lax", 
         path: "/", 
-        secure: process.env.NODE_ENV === "production" 
+        secure: isProduction 
       },
     },
     csrfToken: {
@@ -40,7 +43,7 @@ export const authOptions: NextAuthOptions = {
         httpOnly: false, 
         sameSite: "lax", 
         path: "/", 
-        secure: process.env.NODE_ENV === "production" 
+        secure: isProduction 
       },
     },
   },
