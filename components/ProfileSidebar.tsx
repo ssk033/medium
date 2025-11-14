@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface SidebarProps {
   name: string;
@@ -24,6 +24,7 @@ export default function ProfileSidebar({ name, username, totalBlogs, onToggle }:
     return false;
   });
   const [navbarHeight, setNavbarHeight] = useState(67); // Default navbar height
+  const prevMobileRef = useRef(isMobile);
 
   // Calculate navbar height and handle responsive behavior
   useEffect(() => {
@@ -43,7 +44,8 @@ export default function ProfileSidebar({ name, username, totalBlogs, onToggle }:
 
     const checkMobile = () => {
       const mobile = window.innerWidth < 1024; // lg breakpoint
-      const wasMobile = isMobile;
+      const wasMobile = prevMobileRef.current;
+      prevMobileRef.current = mobile;
       setIsMobile(mobile);
       // Close sidebar when switching to mobile, open when switching to desktop
       if (mobile && !wasMobile) {

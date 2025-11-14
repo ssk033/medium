@@ -35,7 +35,6 @@ export async function GET(req: Request) {
 
     const user = await prisma.user.findUnique({
       where: { username },
-      include: { blogs: true },
       select: {
         id: true,
         name: true,
