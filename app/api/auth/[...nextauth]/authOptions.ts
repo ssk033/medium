@@ -114,43 +114,58 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-     redirect() {
-    return "/blogs";
-  },
+    async redirect({ url, baseUrl }) {
+      // Allow relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allow callback URLs on the same origin
+      if (new URL(url).origin === baseUrl) return url;
+      return `${baseUrl}/blogs`;
+    },
     async signIn({ user, account }) {
-      if (account?.provider === "google" || account?.provider === "linkedin") {
-        let dbUser = await prisma.user.findUnique({
-          where: { email: user.email! },
-        });
+      try {
+        if (account?.provider === "google" || account?.provider === "linkedin") {
+          // Validate email exists
+          if (!user.email) {
+            console.error("❌ OAuth user missing email:", user);
+            return false;
+          }
 
-        const provider = account.provider;
-
-        // Link username + provider
-        if (dbUser && dbUser.provider !== provider) {
-          dbUser = await prisma.user.update({
-            where: { id: dbUser.id },
-            data: { provider: provider },
+          let dbUser = await prisma.user.findUnique({
+            where: { email: user.email },
           });
+
+          const provider = account.provider;
+
+          // Link username + provider
+          if (dbUser && dbUser.provider !== provider) {
+            dbUser = await prisma.user.update({
+              where: { id: dbUser.id },
+              data: { provider: provider },
+            });
+          }
+
+          // New OAuth user
+          if (!dbUser) {
+            dbUser = await prisma.user.create({
+              data: {
+                name: user.name ?? "",
+                email: user.email,
+                username: genUsername(user.name ?? "user"),
+                image: user.image ?? "",
+                provider: provider,
+              },
+            });
+          }
+
+          user.id = dbUser.id;
+          (user as { id: string; username?: string }).username = dbUser.username ?? undefined;
         }
 
-        // New OAuth user
-        if (!dbUser) {
-          dbUser = await prisma.user.create({
-            data: {
-              name: user.name ?? "",
-              email: user.email!,
-              username: genUsername(user.name ?? "user"),
-              image: user.image ?? "",
-              provider: provider,
-            },
-          });
-        }
-
-        user.id = dbUser.id;
-        (user as { id: string; username?: string }).username = dbUser.username ?? undefined;
+        return true;
+      } catch (error) {
+        console.error("❌ signIn callback error:", error);
+        return false;
       }
-
-      return true;
     },
 
     async session({ session, user }) {
