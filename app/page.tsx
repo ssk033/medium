@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import { CometCard } from "@/components/ui/comet-card";
+import { BackgroundLines } from "@/components/ui/background-lines";
 
 export default function Home() {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -62,26 +63,24 @@ export default function Home() {
 
       {/* HERO SECTION */}
       <section className="relative flex flex-col items-center justify-center text-center pt-36 pb-28 px-6 select-none overflow-visible z-10">
-        {/* ⭐ Text Hover Effect with ZINGG */}
-        <div className="h-[40rem] flex items-center justify-center w-full">
-          <TextHoverEffect text="ZINGG" />
-        </div>
+        {/* ⭐ Background Lines with Text Hover Effect - ZINGG */}
+        <BackgroundLines className="flex items-center justify-center w-full flex-col px-4 h-[40rem]">
+          <div className="relative z-20">
+            <TextHoverEffect text="ZINGG" />
+          </div>
+        </BackgroundLines>
 
-        <p className="text-gray-300 text-lg sm:text-xl md:text-2xl mt-6 max-w-2xl">
+        <p className="text-gray-300 text-lg sm:text-xl md:text-2xl mt-6 max-w-2xl relative z-10">
           Create Your Own Story. Let&apos;s rewrite the past, redesign the present, redefine the future.
         </p>
 
-        {/* CTA BUTTON */}
-        <Link href="/signup">
-          <button
-            className="
-              rgb-ring
-              relative mt-14 px-14 py-5 text-xl font-bold rounded-2xl
-              text-black hover:scale-[1.10]
-              transition-all duration-300
-            "
-          >
-            🚀 Start Blogging Now
+        {/* CTA BUTTON - Animated Border Magic */}
+        <Link href="/signup" className="relative z-10 mt-14">
+          <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-[#27B4F5] focus:ring-offset-2 focus:ring-offset-black">
+            <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#27B4F5_0%,#00eeff_50%,#27B4F5_100%)]" />
+            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-black px-8 py-3 text-base font-semibold text-[#27B4F5] backdrop-blur-3xl hover:text-white transition-colors duration-300">
+              🚀 Start Blogging Now
+            </span>
           </button>
         </Link>
       </section>
