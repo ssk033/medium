@@ -6,7 +6,8 @@ import { useState } from "react";
 
 type Blog = {
   id: number;
-  author: { name: string };
+  author: { name: string; id?: string };
+  authorID?: string;
   title: string;
   content: string;
   createdAt: string;
@@ -15,6 +16,7 @@ type Blog = {
 
 type BlogsProps = {
   blogs: Blog[];
+  onBlogDeleted?: () => void;
 };
 
 export const Blogs = ({ blogs }: BlogsProps) => {
@@ -73,10 +75,12 @@ export const Blogs = ({ blogs }: BlogsProps) => {
               key={blog.id}
               blogId={blog.id}
               authorname={blog.author.name}
+              authorId={blog.authorID || blog.author.id}
               title={blog.title}
               content={blog.content}
               initialLikes={blog._count.likes}
               onViewComments={() => loadComments(blog.id)}
+              onDeleteBlog={onBlogDeleted}
             />
           ))
         )}

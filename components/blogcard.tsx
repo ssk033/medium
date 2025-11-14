@@ -2,24 +2,31 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 interface BlogCardProps {
   blogId: number;
   authorname: string;
+  authorId?: string;
   title: string;
   content: string;
   initialLikes: number;
   onViewComments: () => void;
+  onDeleteBlog?: () => void;
 }
 
 export const Blogcard = ({
   blogId,
   authorname,
+  authorId,
   title,
   content,
   initialLikes,
   onViewComments,
+  onDeleteBlog,
 }: BlogCardProps) => {
+  const { data: session } = useSession();
+  const isAuthor = session?.user?.id === authorId;
   const today = new Date().toLocaleDateString("en-IN", {
     day: "2-digit",
     month: "short",
@@ -70,6 +77,19 @@ export const Blogcard = ({
         setCommentOpen(false);
         alert("✅ Comment added!");
       });
+  };
+
+  const handleDelete = async () => {
+    if (!confirm("Are you sure you want to delete this blog?")) return;
+
+    try {
+      await axios.delete(`/api/blog?blogId=${blogId}`);
+      alert("✅ Blog deleted successfully!");
+      if (onDeleteBlog) onDeleteBlog();
+    } catch (error) {
+      const err = error as { response?: { data?: { error?: string } } };
+      alert(err?.response?.data?.error || "Failed to delete blog");
+    }
   };
 
   return (
@@ -157,11 +177,25 @@ export const Blogcard = ({
                     }}
                     className="
                       w-full text-left px-3 py-2 rounded-lg text-gray-200
-                      hover:bg-[#27B4F5] hover:text-black transition
+                      hover:bg-[#27B4F5] hover:text-black transition mb-1
                     "
                   >
                     Show Comments 💬
                   </button>
+                  {isAuthor && onDeleteBlog && (
+                    <button
+                      onClick={() => {
+                        handleDelete();
+                        setMenuOpen(false);
+                      }}
+                      className="
+                        w-full text-left px-3 py-2 rounded-lg text-red-400
+                        hover:bg-red-500 hover:text-white transition
+                      "
+                    >
+                      Delete Blog 🗑️
+                    </button>
+                  )}
                 </div>
               )}
             </div>

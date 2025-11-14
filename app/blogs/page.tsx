@@ -32,7 +32,7 @@ export default function BlogsPage() {
           <div className="w-14 h-14 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
         </div>
       ) : (
-        <Blogs blogs={blogs} />
+        <Blogs blogs={blogs} onBlogDeleted={loadBlogs} />
       )}
 
       <button

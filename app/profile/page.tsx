@@ -1,5 +1,6 @@
 // app/profile/page.tsx
 import ProfileSidebar from "@/components/ProfileSidebar";
+import ProfileBlogs from "@/components/ProfileBlogs";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -73,43 +74,7 @@ export default async function ProfilePage() {
             Your Blogs
           </h2>
 
-          <div className="mt-6 space-y-4">
-            {user.blogs.length === 0 ? (
-              <div className="p-6 rounded-xl border border-[#27B4F5]/20 bg-black/20 backdrop-blur-sm">
-                <p className="text-gray-500 italic text-center">You haven&apos;t posted any blogs yet.</p>
-              </div>
-            ) : (
-              user.blogs.map((blog) => (
-                <div
-                  key={blog.id}
-                  className="
-                    relative overflow-hidden
-                    p-5 rounded-xl cursor-pointer
-                    border border-[#27B4F5]/40 
-                    bg-gradient-to-br from-black/30 to-black/20
-                    backdrop-blur-sm
-                    hover:border-[#27B4F5] hover:bg-[#27B4F5]/10
-                    shadow-[0_0_20px_rgba(39,180,245,0.4)]
-                    hover:shadow-[0_0_35px_rgba(39,180,245,0.8)]
-                    transition-all duration-300 ease-out
-                    hover:scale-[1.02]
-                    before:absolute before:inset-0 before:bg-gradient-to-r
-                    before:from-transparent before:via-[#27B4F5]/5 before:to-transparent
-                    before:translate-x-[-100%] hover:before:translate-x-[100%]
-                    before:transition-transform before:duration-700
-                  "
-                >
-                  <h3 className="text-xl font-semibold text-white relative z-10 
-                    hover:text-[#27B4F5] transition-colors">
-                    {blog.title}
-                  </h3>
-                  <p className="text-sm text-gray-400 mt-2 relative z-10">
-                    {new Date(blog.createdAt!).toLocaleDateString("en-IN")}
-                  </p>
-                </div>
-              ))
-            )}
-          </div>
+          <ProfileBlogs blogs={user.blogs} />
         </div>
       </main>
     </div>

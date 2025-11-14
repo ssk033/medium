@@ -128,7 +128,7 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
 
-    async session({ session, user }: { session: { user?: { id?: string; username?: string; name?: string; email?: string; image?: string } }; user?: { id: string; username?: string | null; name?: string | null; email?: string | null; image?: string | null } }) {
+    async session({ session, user }) {
       if (user) {
         session.user = {
           id: user.id,
