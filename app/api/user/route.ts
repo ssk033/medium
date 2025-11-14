@@ -1,6 +1,76 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/authOptions";
+
+export async function GET(req: Request) {
+  try {
+    const session = await getServerSession(authOptions);
+    
+    if (!session?.user?.username) {
+      return NextResponse.json(
+        { error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    const { searchParams } = new URL(req.url);
+    const username = searchParams.get("username");
+
+    if (!username) {
+      return NextResponse.json(
+        { error: "Username is required" },
+        { status: 400 }
+      );
+    }
+
+    // Only allow users to fetch their own data
+    if (username !== session.user.username) {
+      return NextResponse.json(
+        { error: "Forbidden" },
+        { status: 403 }
+      );
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { username },
+      include: { blogs: true },
+      select: {
+        id: true,
+        name: true,
+        username: true,
+        email: true,
+        blogs: {
+          select: {
+            id: true,
+            title: true,
+            createdAt: true,
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
+        },
+      },
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "User not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ user }, { status: 200 });
+  } catch (err) {
+    console.error("❌ GET /api/user Error:", err);
+    const errorMessage = err instanceof Error ? err.message : "Server error";
+    return NextResponse.json(
+      { error: errorMessage },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(req: Request) {
   try {
