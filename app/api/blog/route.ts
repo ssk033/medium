@@ -37,7 +37,7 @@ export async function GET() {
     const blogs = await prisma.blog.findMany({
       include: {
         author: {
-          select: { username: true, name: true, image: true },
+          select: { id: true, username: true, name: true, image: true },
         },
         _count: {
           select: {
