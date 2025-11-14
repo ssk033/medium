@@ -36,21 +36,8 @@ export default function NavBar() {
             onClick={() => router.push("/")}
             className="relative flex items-center cursor-pointer group select-none z-10"
           >
-            {/* Logo Icon with Premium Glow */}
-            <div className="relative">
-              <div className="absolute inset-0 bg-[#27B4F5]/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <img 
-                src="/icons/Zschool.svg" 
-                alt="ZINGG Logo"
-                className="relative w-14 h-14 group-hover:scale-110 transition-all duration-300 
-                  drop-shadow-[0_0_15px_rgba(39,180,245,0.6)]
-                  group-hover:drop-shadow-[0_0_25px_rgba(39,180,245,1)]
-                  filter brightness-110" 
-              />
-            </div>
-
             {/* Premium ZINGG Text with Enhanced Styling */}
-            <div className="relative ml-5">
+            <div className="relative">
               <h1
                 className="
                   text-[32px] font-extrabold tracking-[0.15em]

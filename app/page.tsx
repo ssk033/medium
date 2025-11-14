@@ -1,62 +1,23 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import { CometCard } from "@/components/ui/comet-card";
 import { BackgroundLines } from "@/components/ui/background-lines";
 
 export default function Home() {
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
-
-    const cells = grid.querySelectorAll(".cell");
-
-    cells.forEach((cell) => {
-      cell.addEventListener("mousemove", () => {
-        const neon = `hsl(${Math.random() * 360}, 100%, 55%)`;
-
-        cell.setAttribute(
-          "style",
-          `
-          background-color: ${neon};
-          box-shadow:
-            0 0 10px ${neon},
-            0 0 25px ${neon},
-            inset 0 0 15px ${neon};
-        `
-        );
-
-        setTimeout(() => {
-          cell.removeAttribute("style");
-        }, 350);
-      });
-    });
-
-    return () => {
-      cells.forEach((cell) => {
-        cell.removeEventListener("mousemove", () => {});
-      });
-    };
-  }, []);
 
   return (
     <div className="min-h-screen w-full text-white flex flex-col items-center justify-start overflow-visible relative bg-black">
       {/* ✅ Subtle gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#27B4F5]/5 via-transparent to-transparent pointer-events-none z-0" />
 
-      {/* ✅ Neon Grid Background with hover comet effect */}
-      <div
-        ref={gridRef}
-        className="absolute inset-0 grid grid-cols-[repeat(18,minmax(0,1fr))] grid-rows-[repeat(12,minmax(0,1fr))] opacity-60 z-0"
-      >
+      {/* ✅ Neon Grid Background */}
+      <div className="absolute inset-0 grid grid-cols-[repeat(18,minmax(0,1fr))] grid-rows-[repeat(12,minmax(0,1fr))] opacity-60 z-0">
         {Array.from({ length: 216 }).map((_, i) => (
           <div 
             key={i} 
-            className="cell border border-[#27B4F5]/10 hover:border-[#27B4F5]/30 transition-colors duration-300" 
+            className="border border-[#27B4F5]/10 transition-colors duration-300" 
           />
         ))}
       </div>
@@ -95,16 +56,16 @@ export default function Home() {
           <CometCard key={i}>
             <div
               className="
-                border border-[#27B4F5]/50 rounded-xl p-6 w-[330px]
+                border border-[#27B4F5]/50 rounded-xl p-8 w-full max-w-[450px]
                 backdrop-blur-xl bg-[#0B0E10]/70
                 shadow-[0_0_30px_rgba(39,180,245,0.6)]
                 hover:shadow-[0_0_65px_rgba(39,180,245,1)]
                 transition-all duration-300
               "
             >
-              <p className="text-sm text-gray-300">{text}</p>
-              <h3 className="mt-3 font-semibold text-lg text-[#27B4F5]">⭐⭐⭐⭐⭐</h3>
-              <p className="text-gray-400 mt-2 text-sm">
+              <p className="text-base md:text-lg text-gray-300">{text}</p>
+              <h3 className="mt-4 font-semibold text-xl md:text-2xl text-[#27B4F5]">⭐⭐⭐⭐⭐</h3>
+              <p className="text-gray-400 mt-3 text-base md:text-lg">
                 – {["Rohan, Developer", "Sneha, Blogger", "Arjun, UI/UX Designer"][i]}
               </p>
             </div>
