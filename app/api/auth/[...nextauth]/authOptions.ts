@@ -12,10 +12,10 @@ const genUsername = (name: string) =>
   Math.floor(1000 + Math.random() * 9000);
 
 export const authOptions: NextAuthOptions = {
-  // ⭐ Important for localhost on Linux
-  useSecureCookies: false,
+  // ⭐ Cookie settings - set useSecureCookies based on environment
+  useSecureCookies: process.env.NODE_ENV === "production",
 
-  // ⭐ Forces Chrome/Linux/Fedora to accept cookies
+  // ⭐ Cookie configuration for authentication
   cookies: {
     sessionToken: {
       name: "next-auth.session-token",
@@ -23,16 +23,25 @@ export const authOptions: NextAuthOptions = {
         httpOnly: true,
         sameSite: "lax",
         path: "/",
-        secure: false, // MUST be false for localhost
+        secure: process.env.NODE_ENV === "production", // true for production (HTTPS), false for localhost
       },
     },
     callbackUrl: {
       name: "next-auth.callback-url",
-      options: { sameSite: "lax", path: "/", secure: false },
+      options: { 
+        sameSite: "lax", 
+        path: "/", 
+        secure: process.env.NODE_ENV === "production" 
+      },
     },
     csrfToken: {
       name: "next-auth.csrf-token",
-      options: { httpOnly: false, sameSite: "lax", path: "/", secure: false },
+      options: { 
+        httpOnly: false, 
+        sameSite: "lax", 
+        path: "/", 
+        secure: process.env.NODE_ENV === "production" 
+      },
     },
   },
 

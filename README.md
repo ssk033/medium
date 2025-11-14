@@ -14,7 +14,9 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [https://zingg-eight.vercel.app/](https://zingg-eight.vercel.app/) with your browser to see the result.
+
+For local development, run the dev server and open [http://localhost:3000](http://localhost:3000).
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
@@ -27,7 +29,8 @@ Create a `.env.local` file in the root directory and add the following variables
 ```env
 # NextAuth
 NEXTAUTH_SECRET=your-secret-key-here
-NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_URL=https://zingg-eight.vercel.app
+# For local development, use: NEXTAUTH_URL=http://localhost:3000
 
 # Google OAuth (optional)
 GOOGLE_CLIENT_ID=your-google-client-id
