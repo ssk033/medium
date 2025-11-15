@@ -35,15 +35,21 @@ export const CompactFileUpload = ({
     if (filesToAdd.length > 0) {
       const updatedFiles = [...files, ...filesToAdd];
       setFiles(updatedFiles);
-      onChange && onChange(updatedFiles);
+      if (onChange) {
+        onChange(updatedFiles);
+      }
     }
   };
 
   const handleRemove = (index: number) => {
     const updatedFiles = files.filter((_, i) => i !== index);
     setFiles(updatedFiles);
-    onChange && onChange(updatedFiles);
-    onRemove && onRemove(index);
+    if (onChange) {
+      onChange(updatedFiles);
+    }
+    if (onRemove) {
+      onRemove(index);
+    }
   };
 
   const handleClick = () => {

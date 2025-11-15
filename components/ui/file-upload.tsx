@@ -50,10 +50,14 @@ export const FileUpload = ({
 
     if (multiple) {
       setFiles((prevFiles) => [...prevFiles, ...validFiles]);
-      onChange && onChange(validFiles);
+      if (onChange) {
+        onChange(validFiles);
+      }
     } else {
       setFiles(validFiles.slice(0, 1));
-      onChange && onChange(validFiles.slice(0, 1));
+      if (onChange) {
+        onChange(validFiles.slice(0, 1));
+      }
     }
   };
 
