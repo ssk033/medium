@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import Add from "@/components/AddBlog";
 
 export default function NavBar() {
@@ -72,9 +73,11 @@ export default function NavBar() {
             {/* Bolt Icon with Premium Effects */}
             <div className="relative ml-3">
               <div className="absolute inset-0 bg-[#27B4F5]/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <img 
+              <Image 
                 src="/icons/bolt.svg" 
                 alt="Bolt Icon"
+                width={32}
+                height={32}
                 className="relative h-8 w-8 transition-all duration-300 
                   group-hover:scale-110 group-hover:rotate-12
                   drop-shadow-[0_0_10px_rgba(39,180,245,0.5)]
@@ -130,9 +133,11 @@ export default function NavBar() {
             <div className="relative group">
               <div className="absolute inset-0 bg-[#27B4F5]/20 rounded-full blur-lg opacity-0 
                 group-hover:opacity-100 transition-opacity duration-300" />
-              <img
+              <Image
                 src="/icons/prof.svg"
                 alt="Profile"
+                width={44}
+                height={44}
                 onClick={() => setOpenSidebar(true)}
                 className="relative w-11 h-11 cursor-pointer 
                   hover:scale-110 transition-all duration-300
@@ -217,7 +222,7 @@ export default function NavBar() {
               before:translate-x-[-100%] hover:before:translate-x-[100%]
               before:transition-transform before:duration-700"
           >
-            <img src="/icons/profile.svg" alt="Profile" className="w-6 h-6 relative z-10 filter brightness-110" />
+            <Image src="/icons/profile.svg" alt="Profile" width={24} height={24} className="w-6 h-6 relative z-10 filter brightness-110" />
             <span className="relative z-10">View Profile</span>
           </button>
 
@@ -238,7 +243,7 @@ export default function NavBar() {
               before:translate-x-[-100%] hover:before:translate-x-[100%]
               before:transition-transform before:duration-700"
           >
-            <img src="/icons/blogs.svg" alt="Blogs" className="w-6 h-6 relative z-10 filter brightness-110" />
+            <Image src="/icons/blogs.svg" alt="Blogs" width={24} height={24} className="w-6 h-6 relative z-10 filter brightness-110" />
             <span className="relative z-10">Blogs</span>
           </button>
 
@@ -259,7 +264,7 @@ export default function NavBar() {
               before:translate-x-[-100%] hover:before:translate-x-[100%]
               before:transition-transform before:duration-700"
           >
-            <img src="/icons/create.svg" alt="Create" className="w-6 h-6 relative z-10 filter brightness-110" />
+            <Image src="/icons/create.svg" alt="Create" width={24} height={24} className="w-6 h-6 relative z-10 filter brightness-110" />
             <span className="relative z-10">Create Blog</span>
           </button>
 
@@ -280,7 +285,7 @@ export default function NavBar() {
               before:translate-x-[-100%] hover:before:translate-x-[100%]
               before:transition-transform before:duration-700"
           >
-            <img src="/icons/logout.svg" alt="Logout" className="w-6 h-6 relative z-10 filter brightness-110" />
+            <Image src="/icons/logout.svg" alt="Logout" width={24} height={24} className="w-6 h-6 relative z-10 filter brightness-110" />
             <span className="relative z-10">Logout</span>
           </button>
         </div>

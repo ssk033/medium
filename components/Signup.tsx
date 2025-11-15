@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Signup() {
   const router = useRouter();
@@ -231,8 +232,8 @@ export default function Signup() {
             before:translate-x-[-100%] hover:before:translate-x-[100%]
             before:transition-transform before:duration-700
           "
-        >
-          <img src="/icons/google-gmail-svgrepo-com.svg" alt="Google" className="w-5 h-5 relative z-10" />
+          >
+          <Image src="/icons/google-gmail-svgrepo-com.svg" alt="Google" width={20} height={20} className="w-5 h-5 relative z-10" />
           <span className="relative z-10">Continue with Google</span>
         </button>
 
@@ -253,7 +254,7 @@ export default function Signup() {
             before:transition-transform before:duration-700
           "
         >
-          <img src="/icons/linkedin-svgrepo-com.svg" alt="LinkedIn" className="w-5 h-5 relative z-10" />
+          <Image src="/icons/linkedin-svgrepo-com.svg" alt="LinkedIn" width={20} height={20} className="w-5 h-5 relative z-10" />
           <span className="relative z-10">Continue with LinkedIn</span>
         </button>
 

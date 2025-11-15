@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { Dialog } from "./Dialog";
 
 interface BlogCardProps {
@@ -306,10 +307,13 @@ export const Blogcard = ({
                       className="relative rounded-lg overflow-hidden bg-black/50 border border-[#27B4F5]/20 group/media"
                     >
                       {isImage ? (
-                        <img
+                        <Image
                           src={url}
                           alt={`Media ${idx + 1}`}
+                          width={800}
+                          height={600}
                           className="w-full h-auto object-cover group-hover/media:scale-105 transition-transform duration-300"
+                          unoptimized={url.startsWith('data:')}
                         />
                       ) : isVideo ? (
                         <video
@@ -370,7 +374,7 @@ export const Blogcard = ({
                   before:transition-transform before:duration-700
                 "
               >
-                <img src="/icons/comment.svg" alt="Comment" className="w-5 h-5 relative z-10" />
+                <Image src="/icons/comment.svg" alt="Comment" width={20} height={20} className="w-5 h-5 relative z-10" />
                 <span className="relative z-10">Comment</span>
               </button>
             </div>
