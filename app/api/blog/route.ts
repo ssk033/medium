@@ -6,14 +6,47 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 // ✅ CREATE BLOG (POST)
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { title, content, authorID } = body;
+    const contentType = req.headers.get("content-type");
+    
+    let title: string;
+    let content: string;
+    let authorID: string;
+    let files: File[] = [];
+
+    if (contentType?.includes("multipart/form-data")) {
+      // Handle FormData (with file uploads)
+      const formData = await req.formData();
+      title = formData.get("title") as string;
+      content = formData.get("content") as string;
+      authorID = formData.get("authorID") as string;
+      
+      // Extract files
+      const fileEntries = formData.getAll("files");
+      files = fileEntries.filter((file): file is File => file instanceof File);
+    } else {
+      // Handle JSON (backward compatibility)
+      const body = await req.json();
+      title = body.title;
+      content = body.content;
+      authorID = body.authorID;
+    }
 
     if (!title?.trim() || !content?.trim() || !authorID) {
       return NextResponse.json(
         { error: "Missing required fields: title, content, authorID" },
         { status: 400 }
       );
+    }
+
+    // TODO: Implement file upload to storage (S3, Cloudinary, etc.)
+    // For now, files are accepted but not stored
+    // You'll need to:
+    // 1. Add a mediaUrls field to Blog model (String[] or JSON)
+    // 2. Upload files to storage service
+    // 3. Store the URLs in the database
+    if (files.length > 0) {
+      console.log(`📎 Received ${files.length} file(s) for blog`);
+      // Example: files.forEach(file => console.log(file.name, file.type, file.size));
     }
 
     const blog = await prisma.blog.create({
@@ -24,7 +57,7 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json(blog, { status: 201 });
+    return NextResponse.json({ ...blog, filesReceived: files.length }, { status: 201 });
   } catch (err) {
     console.error("❌ POST /api/blog Error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
