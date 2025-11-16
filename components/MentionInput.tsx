@@ -138,11 +138,41 @@ export default function MentionInput({
     document.body.appendChild(span);
 
     const rect = textarea.getBoundingClientRect();
-    const lineHeight = parseInt(window.getComputedStyle(textarea).lineHeight);
+    const lineHeight = parseInt(window.getComputedStyle(textarea).lineHeight) || 20;
     const lines = textBeforeMention.split("\n").length;
     
-    const top = rect.top + (lines * lineHeight) + 25;
-    const left = rect.left + span.offsetWidth;
+    // Calculate initial position
+    let top = rect.top + (lines * lineHeight) + 25;
+    let left = rect.left + span.offsetWidth;
+
+    // Dropdown dimensions
+    const dropdownWidth = 256; // w-64 = 256px
+    const dropdownHeight = 240; // max-h-60 = 240px
+
+    // Adjust if going off right edge
+    if (left + dropdownWidth > window.innerWidth) {
+      left = window.innerWidth - dropdownWidth - 10;
+    }
+
+    // Adjust if going off left edge
+    if (left < 10) {
+      left = 10;
+    }
+
+    // Adjust if going off bottom edge
+    if (top + dropdownHeight > window.innerHeight) {
+      // Show above the cursor instead
+      top = rect.top + (lines * lineHeight) - dropdownHeight - 10;
+      // If still off screen at top, position at top of viewport
+      if (top < 10) {
+        top = 10;
+      }
+    }
+
+    // Adjust if going off top edge
+    if (top < 10) {
+      top = rect.top + (lines * lineHeight) + 25;
+    }
 
     document.body.removeChild(span);
     return { top, left };
@@ -163,9 +193,13 @@ export default function MentionInput({
       {showSuggestions && suggestions.length > 0 && (
         <div
           ref={suggestionsRef}
-          style={getSuggestionsPosition()}
+          style={{
+            ...getSuggestionsPosition(),
+            position: "fixed",
+            zIndex: 1000,
+          }}
           className="
-            fixed z-[1000] mt-1 max-h-60 w-64 overflow-auto
+            max-h-60 w-64 overflow-auto
             bg-white/95 dark:bg-[#0B0E10]/95 backdrop-blur-xl
             border border-[#27B4F5]/60 rounded-lg shadow-2xl
             py-2

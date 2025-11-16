@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 interface ProfilePopupProps {
-  userId: string;
+  userId?: string;
   userName: string;
   userImage: string | null;
   isOpen: boolean;
