@@ -35,6 +35,8 @@ export default function ProfileSidebar({
   const [followingModalOpen, setFollowingModalOpen] = useState(false);
   const [image, setImage] = useState<string | null>(profileImage || null);
   const [uploading, setUploading] = useState(false);
+  const [viewImageModal, setViewImageModal] = useState(false);
+  const [removing, setRemoving] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   // Initialize mobile state based on window width if available
   const [open, setOpen] = useState(() => {
@@ -173,6 +175,31 @@ export default function ProfileSidebar({
     }
   };
 
+  const handleRemoveImage = async () => {
+    if (!image) return;
+    
+    if (!confirm("Are you sure you want to remove your profile picture?")) {
+      return;
+    }
+
+    setRemoving(true);
+    try {
+      const res = await axios.delete("/api/user/avatar");
+      
+      if (res.data.image === null) {
+        setImage(null);
+        if (onImageUpdate) {
+          onImageUpdate("");
+        }
+      }
+    } catch (error) {
+      console.error("Failed to remove image:", error);
+      alert("Failed to remove profile picture. Please try again.");
+    } finally {
+      setRemoving(false);
+    }
+  };
+
   return (
     <>
       {/* Mobile Overlay */}
@@ -239,7 +266,10 @@ export default function ProfileSidebar({
             {/* Profile Picture Section */}
             <div className="flex flex-col items-center gap-4">
               <div className="relative group">
-                <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-[#27B4F5] shadow-[0_0_25px_rgba(39,180,245,0.6)]">
+                <button
+                  onClick={() => image && setViewImageModal(true)}
+                  className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-[#27B4F5] shadow-[0_0_25px_rgba(39,180,245,0.6)] hover:shadow-[0_0_35px_rgba(39,180,245,0.9)] transition-all cursor-pointer"
+                >
                   {image ? (
                     <Image
                       src={image}
@@ -258,21 +288,35 @@ export default function ProfileSidebar({
                       className="w-full h-full object-cover"
                     />
                   )}
-                </div>
+                </button>
                 {isOwnProfile && (
-                  <>
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
                     <button
                       onClick={() => fileInputRef.current?.click()}
                       disabled={uploading}
-                      className="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-[#27B4F5] text-black flex items-center justify-center hover:bg-[#00eeff] transition-all shadow-lg hover:scale-110 disabled:opacity-50"
+                      className="w-7 h-7 rounded-full bg-[#27B4F5] text-black flex items-center justify-center hover:bg-[#00eeff] transition-all shadow-lg hover:scale-110 disabled:opacity-50 text-xs"
                       title="Change profile picture"
                     >
                       {uploading ? (
-                        <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                        <div className="w-3 h-3 border-2 border-black border-t-transparent rounded-full animate-spin" />
                       ) : (
-                        <span className="text-lg">📷</span>
+                        <span>📷</span>
                       )}
                     </button>
+                    {image && (
+                      <button
+                        onClick={handleRemoveImage}
+                        disabled={removing}
+                        className="w-7 h-7 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition-all shadow-lg hover:scale-110 disabled:opacity-50 text-xs"
+                        title="Remove profile picture"
+                      >
+                        {removing ? (
+                          <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                          <span>🗑️</span>
+                        )}
+                      </button>
+                    )}
                     <input
                       ref={fileInputRef}
                       type="file"
@@ -280,7 +324,7 @@ export default function ProfileSidebar({
                       onChange={handleImageUpload}
                       className="hidden"
                     />
-                  </>
+                  </div>
                 )}
               </div>
             </div>
@@ -375,6 +419,34 @@ export default function ProfileSidebar({
         type="following"
         title="Following"
       />
+
+      {/* View Profile Picture Modal */}
+      {viewImageModal && image && (
+        <div
+          className="fixed inset-0 bg-black/70 dark:bg-black/80 backdrop-blur-md flex justify-center items-center z-[100]"
+          onClick={() => setViewImageModal(false)}
+        >
+          <div
+            className="relative max-w-2xl max-h-[90vh] p-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setViewImageModal(false)}
+              className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition-all shadow-lg z-10"
+            >
+              ✖
+            </button>
+            <Image
+              src={image}
+              alt={`${name}'s profile picture`}
+              width={800}
+              height={800}
+              className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+              unoptimized={image.startsWith('data:')}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }

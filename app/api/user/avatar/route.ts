@@ -74,3 +74,42 @@ export async function POST(req: Request) {
   }
 }
 
+/**
+ * Remove user profile picture
+ * Sets the user's image field to null.
+ */
+export async function DELETE() {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    // Remove profile picture by setting image to null
+    await prisma.user.update({
+      where: { id: session.user.id },
+      data: { image: null },
+      select: {
+        id: true,
+        image: true,
+      },
+    });
+
+    return NextResponse.json(
+      { image: null, message: "Profile picture removed successfully" },
+      { status: 200 }
+    );
+  } catch (err) {
+    console.error("❌ DELETE /api/user/avatar Error:", err);
+    const errorMessage = err instanceof Error ? err.message : "Server error";
+    return NextResponse.json(
+      { error: errorMessage },
+      { status: 500 }
+    );
+  }
+}
+
