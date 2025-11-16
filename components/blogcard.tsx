@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { Dialog } from "./Dialog";
+import ProfilePopup from "./ProfilePopup";
 
 interface BlogCardProps {
   blogId: number;
@@ -54,6 +55,11 @@ export const Blogcard = ({
   const [showFullContent, setShowFullContent] = useState(false);
   const contentLength = content.length;
   const shouldTruncate = contentLength > 150;
+
+  // Profile popup state
+  const [profilePopupOpen, setProfilePopupOpen] = useState(false);
+  const [profilePopupPosition, setProfilePopupPosition] = useState({ x: 0, y: 0 });
+  const profileImageRef = useRef<HTMLDivElement>(null);
 
   // Dialog state
   const [dialog, setDialog] = useState<{
@@ -218,6 +224,16 @@ export const Blogcard = ({
             {/* LEFT → AUTHOR */}
             <div className="flex items-center space-x-4">
               <div
+                ref={profileImageRef}
+                onClick={() => {
+                  if (authorId) {
+                    const rect = profileImageRef.current?.getBoundingClientRect();
+                    if (rect) {
+                      setProfilePopupPosition({ x: rect.left, y: rect.top });
+                      setProfilePopupOpen(true);
+                    }
+                  }
+                }}
                 className="
                   relative inline-flex items-center justify-center
                   w-12 h-12 rounded-full overflow-hidden
@@ -225,7 +241,7 @@ export const Blogcard = ({
                   ring-2 ring-[#27B4F5]
                   shadow-[0_0_25px_rgba(39,180,245,0.6)]
                   group-hover:shadow-[0_0_35px_rgba(39,180,245,0.9)]
-                  transition-all duration-300
+                  transition-all duration-300 cursor-pointer hover:scale-110
                 "
               >
                 {authorImage && authorImage.trim() ? (
@@ -509,6 +525,18 @@ export const Blogcard = ({
         confirmText={dialog.type === "confirm" ? "Delete" : "OK"}
         cancelText="Cancel"
       />
+
+      {/* Profile Popup */}
+      {authorId && (
+        <ProfilePopup
+          userId={authorId}
+          userName={authorname}
+          userImage={authorImage || null}
+          isOpen={profilePopupOpen}
+          onClose={() => setProfilePopupOpen(false)}
+          position={profilePopupPosition}
+        />
+      )}
     </>
   );
 };

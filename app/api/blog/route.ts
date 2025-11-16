@@ -72,12 +72,35 @@ export async function POST(req: Request) {
       console.log(`Processed ${files.length} file(s) for blog`);
     }
 
+    // Extract @ mentions from content
+    const mentionRegex = /@(\w+)/g;
+    const mentions = Array.from(content.matchAll(mentionRegex)).map(
+      (match) => match[1]
+    );
+
+    // Find users by username
+    const taggedUsers = await prisma.user.findMany({
+      where: {
+        username: { in: mentions },
+      },
+      select: { id: true },
+    });
+
+    // Create blog with tags
     const blog = await prisma.blog.create({
       data: {
         title,
         content,
         authorID,
         mediaUrls,
+        tags: {
+          create: taggedUsers.map((user) => ({
+            userId: user.id,
+          })),
+        },
+      },
+      include: {
+        tags: true,
       },
     });
 

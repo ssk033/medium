@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { Dialog } from "./Dialog";
 import { CompactFileUpload } from "./ui/compact-file-upload";
+import MentionInput from "./MentionInput";
 
 type AddProps = {
   onClose: () => void;
@@ -157,15 +158,13 @@ export default function Add({ onClose, onBlogAdded }: AddProps) {
           required
         />
 
-        <textarea
-          placeholder="Write your content here..."
+        <MentionInput
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={setContent}
+          placeholder="Write your content here... (Type @ to mention users)"
           className="w-full h-40 p-3 bg-gray-100 dark:bg-black/20 backdrop-blur-sm border border-[#27B4F5]/40 text-gray-800 dark:text-white rounded-lg mb-6
           focus:border-[#27B4F5] focus:shadow-[0_0_20px_rgba(39,180,245,0.6)] outline-none transition-all duration-300
           placeholder:text-gray-500 resize-none"
-          disabled={loading}
-          required
         />
 
         {/* File Upload Component */}

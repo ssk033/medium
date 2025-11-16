@@ -65,7 +65,7 @@ export const Blogs = ({ blogs, onBlogDeleted }: BlogsProps) => {
           bg-gradient-to-r from-[#27B4F5] to-[#00eeff]
           bg-clip-text text-transparent
           drop-shadow-[0_0_45px_rgba(39,180,245,0.8)]">
-          Explore Blogs
+          Your Feed
         </h1>
 
         {blogs.length === 0 ? (
