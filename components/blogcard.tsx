@@ -238,13 +238,9 @@ export const Blogcard = ({
                     unoptimized={authorImage.startsWith('data:')}
                   />
                 ) : (
-                  <Image
-                    src="/icons/blankuser.svg"
-                    alt="Default avatar"
-                    width={48}
-                    height={48}
-                    className="w-full h-full object-cover"
-                  />
+                  <span className="font-semibold text-[#27B4F5] tracking-wide">
+                    {authorname.slice(0, 2).toUpperCase()}
+                  </span>
                 )}
               </div>
               <div className="flex items-center gap-3">

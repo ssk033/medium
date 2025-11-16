@@ -169,13 +169,9 @@ export default function FollowersFollowingModal({
                         unoptimized={user.image.startsWith('data:')}
                       />
                     ) : (
-                      <Image
-                        src="/icons/blankuser.svg"
-                        alt="Default avatar"
-                        width={48}
-                        height={48}
-                        className="w-full h-full rounded-full object-cover"
-                      />
+                      <span className="font-semibold text-[#27B4F5] text-sm">
+                        {(user.name || user.username || "U").slice(0, 2).toUpperCase()}
+                      </span>
                     )}
                   </div>
 
