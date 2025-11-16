@@ -30,8 +30,8 @@ model User {
   sessions Session[]
 
   // Follow relationships
-  followers Follow[] @relation("UserFollowers")
-  following Follow[] @relation("UserFollowing")
+  followers Follow[] @relation("UserFollowing")  // People who follow this user (where followingId = this user's id)
+  following Follow[] @relation("UserFollowers")  // People this user follows (where followerId = this user's id)
 }
 
 //
@@ -135,8 +135,8 @@ model Follow {
   followingId String   // User being followed
   createdAt   DateTime @default(now())
 
-  follower  User @relation("UserFollowers", fields: [followerId], references: [id], onDelete: Cascade)
-  following User @relation("UserFollowing", fields: [followingId], references: [id], onDelete: Cascade)
+  follower  User @relation("UserFollowers", fields: [followerId], references: [id], onDelete: Cascade)   // User who follows
+  following User @relation("UserFollowing", fields: [followingId], references: [id], onDelete: Cascade) // User being followed
 
   @@unique([followerId, followingId])
   @@index([followerId])
