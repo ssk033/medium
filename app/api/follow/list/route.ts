@@ -3,7 +3,12 @@ import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/authOptions";
 
-// GET /api/follow/list?userId=xxx&type=followers|following
+/**
+ * Get list of followers or following users
+ * Returns a list of users with their follow status relative to the current user.
+ * @param userId - The user ID to get followers/following for
+ * @param type - Either "followers" or "following"
+ */
 export async function GET(req: Request) {
   try {
     const session = await getServerSession(authOptions);

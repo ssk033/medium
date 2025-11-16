@@ -68,7 +68,7 @@ export const Blogcard = ({
     type: "alert",
   });
 
-  // ✅ check already liked
+  // Check if the current user has already liked this blog post
   useEffect(() => {
     axios
       .get(`/api/blog/like?blogId=${blogId}`)
@@ -76,7 +76,8 @@ export const Blogcard = ({
       .catch((err) => console.error("❌ Error checking like:", err));
   }, [blogId]);
 
-  // ✅ check if following author
+  // Check if the current user is following the blog author
+  // Only runs if user is logged in and viewing someone else's post
   useEffect(() => {
     if (!authorId || isAuthor || !session?.user?.id) return;
     
@@ -86,7 +87,9 @@ export const Blogcard = ({
       .catch((err) => console.error("❌ Error checking follow:", err));
   }, [authorId, isAuthor, session?.user?.id]);
 
-  // ✅ Optimistic like update
+  // Toggle like with optimistic UI update
+  // Updates UI immediately, then syncs with server
+  // Reverts on error for consistency
   const toggleLike = () => {
     setLiked((prev) => !prev);
     setLikes((prev) => (liked ? prev - 1 : prev + 1));
@@ -100,7 +103,9 @@ export const Blogcard = ({
       });
   };
 
-  // ✅ Optimistic follow update
+  // Toggle follow status with optimistic UI update
+  // Updates UI immediately, then syncs with server
+  // Reverts on error for consistency
   const toggleFollow = () => {
     if (!authorId || isAuthor || followLoading) return;
 
@@ -131,7 +136,7 @@ export const Blogcard = ({
         setDialog({
           isOpen: true,
           title: "Success",
-          message: "✅ Comment added!",
+          message: "Comment added successfully!",
           type: "alert",
           onConfirm: () => setDialog((prev) => ({ ...prev, isOpen: false })),
         });
@@ -151,7 +156,7 @@ export const Blogcard = ({
           setDialog({
             isOpen: true,
             title: "Success",
-            message: "✅ Blog deleted successfully!",
+            message: "Blog deleted successfully!",
             type: "alert",
             onConfirm: () => {
               setDialog((prev) => ({ ...prev, isOpen: false }));

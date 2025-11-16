@@ -79,7 +79,7 @@ export default function Add({ onClose, onBlogAdded }: AddProps) {
         },
       });
 
-      console.log("✅ SERVER RESPONSE:", res.data);
+      console.log("Server response:", res.data);
 
       if (res.status === 201) {
         onBlogAdded();

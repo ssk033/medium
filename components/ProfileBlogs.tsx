@@ -46,7 +46,7 @@ export default function ProfileBlogs({ blogs: initialBlogs }: ProfileBlogsProps)
           setDialog({
             isOpen: true,
             title: "Success",
-            message: "✅ Blog deleted successfully!",
+            message: "Blog deleted successfully!",
             type: "alert",
             onConfirm: () => {
               setDialog((prev) => ({ ...prev, isOpen: false }));

@@ -192,7 +192,7 @@
   z-index: 1;
 }
 
-/* ✅ Animated RGB border */
+/* Animated RGB gradient border effect */
 .rgb-ring::before {
   content: "";
   position: absolute;
@@ -214,7 +214,7 @@
   filter: blur(1px); /* subtle neon glow */
 }
 
-/* ✅ Button inner area (solid color, NOT transparent) */
+/* Button inner area with solid background (not transparent) */
 .rgb-ring::after {
   content: "";
   position: absolute;

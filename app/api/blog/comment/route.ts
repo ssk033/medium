@@ -3,6 +3,11 @@ import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/authOptions";
 
+/**
+ * Create a new comment on a blog post
+ * Requires authentication and validates blog existence.
+ * Trims comment content before saving.
+ */
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
@@ -59,6 +64,11 @@ export async function POST(req: Request) {
   }
 }
 
+/**
+ * Get all comments for a specific blog post
+ * Returns comments ordered by creation date (newest first).
+ * Includes user information (username and name).
+ */
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);

@@ -3,7 +3,10 @@ import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/authOptions";
 
-// ✅ CHECK IF USER LIKED (GET /api/blog/like?blogId=123)
+/**
+ * Check if the current user has liked a specific blog post
+ * Returns false if user is not authenticated.
+ */
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
@@ -47,7 +50,11 @@ export async function GET(req: Request) {
   }
 }
 
-// ✅ TOGGLE LIKE (POST /api/blog/like)
+/**
+ * Toggle like status for a blog post
+ * Creates a like if it doesn't exist, removes it if it does.
+ * Requires authentication and verifies blog existence.
+ */
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);

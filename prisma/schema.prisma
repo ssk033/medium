@@ -8,9 +8,10 @@ datasource db {
 }
 
 //
-// ✅ USER MODEL (NextAuth Compatible)
-//    - id MUST be String (cuid) because OAuth providers return STRING IDs
-//    - emailVerified is required by PrismaAdapter
+// User Model
+// Compatible with NextAuth.js authentication system.
+// Uses String ID (cuid) to support OAuth providers that return string identifiers.
+// emailVerified field is required by PrismaAdapter for NextAuth integration.
 //
 model User {
   id            String   @id @default(cuid())      // <- string id (important)
@@ -35,7 +36,9 @@ model User {
 }
 
 //
-// ✅ BLOG MODEL
+// Blog Model
+// Represents blog posts created by users.
+// Supports media attachments via mediaUrls array.
 //
 model Blog {
   id        Int      @id @default(autoincrement())
@@ -52,7 +55,9 @@ model Blog {
 }
 
 //
-// ✅ LIKE MODEL (One User can like only once)
+// Like Model
+// Tracks user likes on blog posts.
+// Unique constraint ensures a user can only like a blog once.
 //
 model Like {
   id     Int    @id @default(autoincrement())
@@ -66,7 +71,8 @@ model Like {
 }
 
 //
-// ✅ COMMENT MODEL
+// Comment Model
+// Stores user comments on blog posts with timestamps.
 //
 model Comment {
   id        Int      @id @default(autoincrement())
@@ -80,8 +86,9 @@ model Comment {
 }
 
 //
-// ✅ ACCOUNT MODEL (NextAuth)
-//    - userId must be String because User.id is String
+// Account Model
+// NextAuth.js account model for OAuth provider connections.
+// userId must be String to match User.id type.
 //
 model Account {
   id                Int    @id @default(autoincrement())
@@ -90,7 +97,7 @@ model Account {
   provider          String
   providerAccountId String
 
-  refresh_token     String? @db.Text   // ✅ correct way to use Text
+  refresh_token     String? @db.Text   // Using @db.Text for large token strings
   access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
@@ -104,7 +111,8 @@ model Account {
 }
 
 //
-// ✅ SESSION MODEL (NextAuth)
+// Session Model
+// NextAuth.js session storage for database sessions.
 //
 model Session {
   id           Int      @id @default(autoincrement())
@@ -116,7 +124,8 @@ model Session {
 }
 
 //
-// ✅ VERIFICATION TOKEN (NextAuth)
+// Verification Token Model
+// NextAuth.js model for email verification tokens.
 //
 model VerificationToken {
   identifier String
@@ -127,7 +136,11 @@ model VerificationToken {
 }
 
 //
-// ✅ FOLLOW MODEL (User follows another user)
+// Follow Model
+// Represents a follow relationship between users.
+// followerId: The user who initiates the follow action.
+// followingId: The user being followed.
+// Unique constraint prevents duplicate follow relationships.
 //
 model Follow {
   id          Int      @id @default(autoincrement())

@@ -4,6 +4,12 @@ import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/authOptions";
 
+/**
+ * Get user profile information
+ * Returns user data including blogs, followers count, and following count.
+ * Only returns email if viewing own profile.
+ * Includes whether the current user follows this profile.
+ */
 export async function GET(req: Request) {
   try {
     const session = await getServerSession(authOptions);
@@ -94,6 +100,11 @@ export async function GET(req: Request) {
   }
 }
 
+/**
+ * Create a new user account
+ * Validates email format and checks for duplicate email/username.
+ * Hashes password using bcrypt before storing.
+ */
 export async function POST(req: Request) {
   try {
     const { name, username, email, password } = await req.json();

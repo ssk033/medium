@@ -75,11 +75,11 @@ export default function ProfilePage() {
 
   return (
     <div className="flex bg-white dark:bg-black min-h-screen text-gray-800 dark:text-white relative">
-      {/* ✅ Premium Background Pattern */}
+      {/* Background gradient layers for visual depth */}
       <div className="fixed inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-[#0B0E10] dark:via-black dark:to-[#0B0E10] z-0" />
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(39,180,245,0.05),transparent_70%)] dark:bg-[radial-gradient(circle_at_30%_30%,rgba(39,180,245,0.1),transparent_70%)] z-0" />
       
-      {/* ✅ Animated Grid Background */}
+      {/* Animated grid pattern overlay */}
       <div className="fixed inset-0 grid grid-cols-[repeat(20,minmax(0,1fr))] grid-rows-[repeat(15,minmax(0,1fr))] opacity-10 dark:opacity-20 z-0">
         {Array.from({ length: 300 }).map((_, i) => (
           <div 
@@ -89,7 +89,7 @@ export default function ProfilePage() {
         ))}
       </div>
 
-      {/* ✅ Sidebar with dynamic state */}
+      {/* Profile sidebar with collapsible state */}
       <ProfileSidebar
         name={user.name ?? ""}
         username={user.username ?? ""}
@@ -100,7 +100,7 @@ export default function ProfilePage() {
         onToggle={(isOpen) => setSidebarOpen(isOpen)}
       />
 
-      {/* ✅ Premium Page Content - Dynamic margin based on sidebar state */}
+      {/* Main content area with responsive margin based on sidebar visibility */}
       <main 
         className={`
           relative z-10 flex-1 

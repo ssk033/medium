@@ -34,7 +34,7 @@ export default function Signin() {
 
   return (
     <div className="animate-fadeIn">
-      {/* ✅ Premium Neon Glass Card with Enhanced Effects */}
+      {/* Glassmorphic card with neon border effects */}
       <div
         className="
           relative z-10 p-10 w-[400px] rounded-2xl

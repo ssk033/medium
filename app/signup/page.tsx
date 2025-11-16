@@ -36,10 +36,10 @@ export default function SignupPage() {
 
   return (
     <main className="relative h-screen w-screen bg-white dark:bg-black overflow-hidden flex items-center justify-center">
-      {/* ✅ Subtle gradient overlay for depth */}
+      {/* Subtle gradient overlay for visual depth */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#27B4F5]/5 via-transparent to-transparent pointer-events-none" />
 
-      {/* ✅ Neon Grid Background — Symmetric with Premium Effects */}
+      {/* Animated grid background pattern */}
       <div
         ref={gridRef}
         className="absolute inset-0 grid grid-cols-[repeat(18,minmax(0,1fr))] grid-rows-[repeat(12,minmax(0,1fr))] opacity-30 dark:opacity-60"
@@ -52,7 +52,7 @@ export default function SignupPage() {
         ))}
       </div>
 
-      {/* ✅ Center Signup Card */}
+      {/* Centered signup form card */}
       <Signup />
     </main>
   );

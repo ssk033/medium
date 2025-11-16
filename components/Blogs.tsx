@@ -45,11 +45,11 @@ export const Blogs = ({ blogs, onBlogDeleted }: BlogsProps) => {
 
   return (
     <div className="relative flex bg-white dark:bg-black text-gray-800 dark:text-white pt-[95px] min-h-screen">
-      {/* ✅ Premium Background Pattern */}
+      {/* Background gradient layers for visual depth */}
       <div className="fixed inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-[#0B0E10] dark:via-black dark:to-[#0B0E10] z-0" />
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(39,180,245,0.05),transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_50%,rgba(39,180,245,0.1),transparent_70%)] z-0" />
       
-      {/* ✅ Animated Grid Background */}
+      {/* Animated grid pattern overlay */}
       <div className="fixed inset-0 grid grid-cols-[repeat(20,minmax(0,1fr))] grid-rows-[repeat(15,minmax(0,1fr))] opacity-10 dark:opacity-20 z-0">
         {Array.from({ length: 300 }).map((_, i) => (
           <div 

@@ -3,7 +3,11 @@ import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/authOptions";
 
-// POST /api/follow - Follow or unfollow a user
+/**
+ * Follow or unfollow a user
+ * Toggles the follow relationship between the current user and target user.
+ * Prevents users from following themselves.
+ */
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
@@ -92,7 +96,10 @@ export async function POST(req: Request) {
   }
 }
 
-// GET /api/follow?userId=xxx - Check if current user follows a user
+/**
+ * Check if the current user follows a specific user
+ * Returns false if user is not authenticated.
+ */
 export async function GET(req: Request) {
   try {
     const session = await getServerSession(authOptions);

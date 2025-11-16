@@ -182,11 +182,11 @@ export default function NavBar() {
           </div>
         </div>
 
-        {/* ✅ PREMIUM RGB ANIMATED LIGHT STRIP */}
+        {/* Animated RGB gradient light strip at bottom of navbar */}
         <div className="h-[3px] w-full animate-rgbGlow shadow-[0_2px_10px_rgba(255,0,93,0.5)]" />
       </nav>
 
-      {/* ✅ PREMIUM TOGGLE BUTTON */}
+      {/* Mobile navigation toggle button */}
       <button
         onClick={() => setNavVisible(!navVisible)}
         className={`
@@ -326,9 +326,9 @@ export default function NavBar() {
         </div>
       </div>
 
-      {/* ✅ BLOG MODAL */}
+      {/* Blog creation modal */}
       {openAddModal && (
-        <Add onClose={() => setOpenAddModal(false)} onBlogAdded={() => console.log("Blog added ✅")} />
+        <Add onClose={() => setOpenAddModal(false)} onBlogAdded={() => console.log("Blog added")} />
       )}
     </>
   );

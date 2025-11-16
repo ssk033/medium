@@ -31,9 +31,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* ✅ ThemeProvider must wrap everything */}
+        {/* ThemeProvider wraps entire app for dark mode support */}
         <ThemeProvider>
-          {/* ✅ SessionProvider must wrap everything */}
+          {/* SessionProvider wraps app for NextAuth session management */}
           <SessionProviderWrapper>
             <NavBar />
             {children}

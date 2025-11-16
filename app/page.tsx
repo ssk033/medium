@@ -44,10 +44,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen w-full text-gray-800 dark:text-white flex flex-col items-center justify-start overflow-visible relative bg-white dark:bg-black">
-      {/* ✅ Subtle gradient overlay for depth */}
+      {/* Subtle gradient overlay for visual depth */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#27B4F5]/5 via-transparent to-transparent pointer-events-none z-0" />
 
-      {/* ✅ Neon Grid Background with hover comet effect */}
+      {/* Animated grid background with interactive hover effects */}
       <div
         ref={gridRef}
         className="absolute inset-0 grid grid-cols-[repeat(18,minmax(0,1fr))] grid-rows-[repeat(12,minmax(0,1fr))] opacity-30 dark:opacity-60 z-0"

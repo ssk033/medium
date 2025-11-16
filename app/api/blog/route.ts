@@ -3,7 +3,11 @@ import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/authOptions";
 
-// ✅ CREATE BLOG (POST)
+/**
+ * Create a new blog post
+ * Supports both multipart/form-data (with file uploads) and JSON formats.
+ * Converts uploaded files to base64 data URLs for storage.
+ */
 export async function POST(req: Request) {
   try {
     const contentType = req.headers.get("content-type");
@@ -67,7 +71,11 @@ export async function POST(req: Request) {
   }
 }
 
-// ✅ GET ALL BLOGS (FETCH)
+/**
+ * Retrieve all blog posts
+ * Returns blogs with author information and like/comment counts.
+ * Ordered by creation date (newest first).
+ */
 export async function GET() {
   try {
     const blogs = await prisma.blog.findMany({
@@ -94,7 +102,11 @@ export async function GET() {
   }
 }
 
-// ✅ DELETE BLOG (DELETE)
+/**
+ * Delete a blog post
+ * Only the blog author can delete their own posts.
+ * Cascades deletion of associated likes and comments.
+ */
 export async function DELETE(req: Request) {
   try {
     const session = await getServerSession(authOptions);
