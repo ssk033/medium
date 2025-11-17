@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import { FloatingDock } from "@/components/ui/floating-dock";
 import { IconBrandGithub, IconBrandX, IconBrandLinkedin } from "@tabler/icons-react";
-import Image from "next/image";
 
 export default function OurStoryPage() {
   const gridRef = useRef<HTMLDivElement>(null);
