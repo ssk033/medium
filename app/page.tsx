@@ -88,13 +88,40 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* REVIEW CARDS with Comet Card Effect */}
+      {/* FEATURE CARDS with Comet Card Effect */}
       <section className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 md:px-8 pb-12 sm:pb-16 md:pb-20 z-10">
-        {[ 
-          "Super clean and fast UI. Feels better than Medium.",
-          "Loved the minimal UI. Posting is super easy.",
-          "Exactly what I needed for personal content posting!",
-        ].map((text, i) => (
+        {[
+          {
+            title: "Smart & Secure Sign-In",
+            description: "Log in effortlessly using Google, LinkedIn, or your own Zing account — fast, secure, and built for speed.",
+            icon: "🔐",
+          },
+          {
+            title: "Build Your Circle",
+            description: "Follow the people you vibe with and unfollow anytime. Curate your perfect social feed.",
+            icon: "👥",
+          },
+          {
+            title: "Express & Engage",
+            description: "Drop likes, share your thoughts, and join the conversation — interaction made simple.",
+            icon: "💬",
+          },
+          {
+            title: "Discover What's Trending",
+            description: "Explore fresh posts from across the community. Find new creators, ideas, and inspiration.",
+            icon: "🔥",
+          },
+          {
+            title: "Share Your Moments",
+            description: "Create posts with photos, videos, and tags. Bring your world to life with just a tap.",
+            icon: "📸",
+          },
+          {
+            title: "Make Your Profile Shine",
+            description: "Customize your bio, photo, and details — build a profile that truly reflects you.",
+            icon: "✨",
+          },
+        ].map((feature, i) => (
           <CometCard key={i}>
             <div
               className="
@@ -103,12 +130,16 @@ export default function Home() {
                 shadow-[0_0_30px_rgba(39,180,245,0.6)]
                 hover:shadow-[0_0_65px_rgba(39,180,245,1)]
                 transition-all duration-300
+                h-full flex flex-col
               "
             >
-              <p className="text-sm sm:text-base md:text-lg text-gray-300">{text}</p>
-              <h3 className="mt-3 sm:mt-4 font-semibold text-lg sm:text-xl md:text-2xl text-[#27B4F5]">⭐⭐⭐⭐⭐</h3>
-              <p className="text-gray-400 mt-2 sm:mt-3 text-xs sm:text-sm md:text-base lg:text-lg">
-                – {["Rohan, Developer", "Sneha, Blogger", "Arjun, UI/UX Designer"][i]}
+              <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">{feature.icon}</div>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#27B4F5] mb-2 sm:mb-3
+                drop-shadow-[0_0_10px_#27B4F5/50]">
+                {feature.title}
+              </h3>
+              <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed flex-grow">
+                {feature.description}
               </p>
             </div>
           </CometCard>
