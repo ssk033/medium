@@ -92,8 +92,11 @@ export default function NavBar() {
 
           {/* ================= PREMIUM NAV BUTTONS ================= */}
           <div className="flex items-center space-x-2 sm:space-x-4 md:space-x-8 z-10">
-            <button className="relative text-xs sm:text-sm md:text-[17px] font-semibold text-gray-800 dark:text-white/90 group
-              hover:text-[#27B4F5] dark:hover:text-white transition-all duration-300 hidden sm:block">
+            <button
+              onClick={() => router.push("/our-story")}
+              className="relative text-xs sm:text-sm md:text-[17px] font-semibold text-gray-800 dark:text-white/90 group
+                hover:text-[#27B4F5] dark:hover:text-white transition-all duration-300 hidden sm:block"
+            >
               <span className="relative z-10">Our Story</span>
               <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-gradient-to-r from-[#27B4F5] to-[#00eeff] 
                 transition-all duration-300 group-hover:w-full shadow-[0_0_10px_#27B4F5]" />

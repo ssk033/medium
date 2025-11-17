@@ -70,7 +70,7 @@ export default function Home() {
 
         <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mt-4 sm:mt-6 max-w-2xl relative z-10 px-2">
           <EncryptedText
-            text="Create Your Own Story. Let's rewrite the past, redesign the present, redefine the future."
+            text="Create Your Own Story."
             encryptedClassName="text-gray-500 dark:text-gray-500"
             revealedClassName="text-gray-600 dark:text-gray-300"
             revealDelayMs={50}
