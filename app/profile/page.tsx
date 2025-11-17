@@ -152,8 +152,8 @@ export default function ProfilePage() {
       <main 
         className={`
           relative z-10 flex-1 
-          px-4 sm:px-6 lg:px-10 
-          py-8 sm:py-10 lg:py-14
+          px-3 sm:px-4 md:px-6 lg:px-10 
+          py-4 sm:py-6 md:py-8 lg:py-10 xl:py-14
           transition-all duration-500 ease-out
           ${isMobile 
             ? 'ml-0' 
@@ -163,12 +163,12 @@ export default function ProfilePage() {
           }
         `}
         style={{
-          paddingTop: 'max(calc(var(--navbar-height, 67px) + 2rem), 6rem)',
+          paddingTop: 'max(calc(var(--navbar-height, 67px) + 1rem), 4rem)',
         }}
       >
         <div
           className="
-            rounded-2xl p-6 sm:p-8 lg:p-10
+            rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10
             backdrop-blur-[20px]
             bg-gradient-to-br from-white/95 via-white/90 to-white/95
             dark:from-[#0B0E10]/80 dark:via-[#0B0E10]/75 dark:to-[#0B0E10]/80
@@ -178,19 +178,19 @@ export default function ProfilePage() {
             hover:shadow-[0_0_65px_rgba(39,180,245,0.5),inset_0_1px_0_rgba(0,0,0,0.1)]
             dark:hover:shadow-[0_0_65px_rgba(39,180,245,0.9),inset_0_1px_0_rgba(255,255,255,0.15)]
             transition-all duration-500 ease-out
-            before:absolute before:inset-0 before:rounded-2xl
+            before:absolute before:inset-0 before:rounded-xl sm:before:rounded-2xl
             before:bg-gradient-to-br before:from-[#27B4F5]/5 before:via-transparent before:to-transparent
             before:pointer-events-none before:opacity-0 hover:before:opacity-100
             before:transition-opacity before:duration-500
             relative
           "
         >
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#27B4F5] 
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#27B4F5] 
             drop-shadow-[0_0_20px_#27B4F5,0_0_40px_#27B4F5/50]">
             Welcome, {user.name}
           </h1>
 
-          <p className="text-gray-500 dark:text-gray-400 mt-2 text-base sm:text-lg font-medium">@{user.username ?? "unknown"}</p>
+          <p className="text-gray-500 dark:text-gray-400 mt-1 sm:mt-2 text-sm sm:text-base md:text-lg font-medium">@{user.username ?? "unknown"}</p>
 
           {/* Tabs */}
           <div className="flex gap-4 mt-8 sm:mt-10 border-b border-[#27B4F5]/30">

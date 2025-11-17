@@ -30,7 +30,7 @@ export default function NavBar() {
             border-b border-[#27B4F5]/40
             shadow-[0_0_30px_rgba(39,180,245,0.3),inset_0_1px_0_rgba(0,0,0,0.05)]
             dark:shadow-[0_0_30px_rgba(39,180,245,0.6),inset_0_1px_0_rgba(255,255,255,0.1)]
-            px-8 pt-5 pb-5 flex justify-between items-center
+            px-3 sm:px-6 md:px-8 pt-3 sm:pt-4 md:pt-5 pb-3 sm:pb-4 md:pb-5 flex justify-between items-center
             before:absolute before:inset-0 before:bg-gradient-to-r 
             before:from-[#27B4F5]/5 before:via-transparent before:to-transparent
             before:pointer-events-none before:opacity-50
@@ -45,9 +45,9 @@ export default function NavBar() {
             <div className="relative">
               <h1
                 className="
-                  text-[32px] font-extrabold tracking-[0.15em]
+                  text-xl sm:text-2xl md:text-[32px] font-extrabold tracking-[0.1em] sm:tracking-[0.15em]
                   transition-all duration-500 ease-out
-                  group-hover:tracking-[0.25em]
+                  group-hover:tracking-[0.15em] sm:group-hover:tracking-[0.25em]
                   relative z-10
                 "
                 style={{
@@ -82,7 +82,7 @@ export default function NavBar() {
                 alt="Bolt Icon"
                 width={32}
                 height={32}
-                className="relative h-8 w-8 transition-all duration-300 
+                className="relative h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 transition-all duration-300 
                   group-hover:scale-110 group-hover:rotate-12
                   drop-shadow-[0_0_10px_rgba(39,180,245,0.5)]
                   filter brightness-110" 
@@ -91,9 +91,9 @@ export default function NavBar() {
           </div>
 
           {/* ================= PREMIUM NAV BUTTONS ================= */}
-          <div className="flex items-center space-x-8 z-10">
-            <button className="relative text-[17px] font-semibold text-gray-800 dark:text-white/90 group
-              hover:text-[#27B4F5] dark:hover:text-white transition-all duration-300">
+          <div className="flex items-center space-x-2 sm:space-x-4 md:space-x-8 z-10">
+            <button className="relative text-xs sm:text-sm md:text-[17px] font-semibold text-gray-800 dark:text-white/90 group
+              hover:text-[#27B4F5] dark:hover:text-white transition-all duration-300 hidden sm:block">
               <span className="relative z-10">Our Story</span>
               <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-gradient-to-r from-[#27B4F5] to-[#00eeff] 
                 transition-all duration-300 group-hover:w-full shadow-[0_0_10px_#27B4F5]" />
@@ -103,7 +103,7 @@ export default function NavBar() {
 
             <button
               onClick={() => router.push("/blogs")}
-              className="relative text-[17px] font-semibold text-gray-800 dark:text-white/90 group
+              className="relative text-xs sm:text-sm md:text-[17px] font-semibold text-gray-800 dark:text-white/90 group
                 hover:text-[#27B4F5] dark:hover:text-white transition-all duration-300"
             >
               <span className="relative z-10">Blogs</span>
@@ -119,7 +119,8 @@ export default function NavBar() {
                 relative overflow-hidden
                 bg-gradient-to-r from-[#27B4F5]/20 to-[#27B4F5]/10
                 border border-[#27B4F5]/70 text-[#27B4F5]
-                px-7 py-2.5 rounded-full font-semibold
+                px-3 sm:px-5 md:px-7 py-1.5 sm:py-2 md:py-2.5 rounded-full font-semibold
+                text-xs sm:text-sm md:text-base
                 shadow-[0_0_15px_rgba(39,180,245,0.4)]
                 hover:bg-[#27B4F5] hover:text-black hover:border-[#27B4F5]
                 hover:shadow-[0_0_30px_rgba(39,180,245,0.8)]
@@ -131,7 +132,8 @@ export default function NavBar() {
                 before:transition-transform before:duration-700
               "
             >
-              <span className="relative z-10">Sign Up</span>
+              <span className="relative z-10 hidden sm:inline">Sign Up</span>
+              <span className="relative z-10 sm:hidden">Sign</span>
             </button>
 
             {/* Theme Toggle Button */}
@@ -139,7 +141,7 @@ export default function NavBar() {
               onClick={toggleTheme}
               className="
                 relative overflow-hidden
-                w-11 h-11 rounded-full
+                w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full
                 bg-gradient-to-r from-[#27B4F5]/20 to-[#27B4F5]/10
                 border border-[#27B4F5]/70
                 flex items-center justify-center
@@ -153,11 +155,11 @@ export default function NavBar() {
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
-                <span className="text-[#27B4F5] group-hover:text-black text-xl font-bold transition-colors duration-300">
+                <span className="text-[#27B4F5] group-hover:text-black text-sm sm:text-base md:text-xl font-bold transition-colors duration-300">
                   ☀️
                 </span>
               ) : (
-                <span className="text-[#27B4F5] group-hover:text-black text-xl font-bold transition-colors duration-300">
+                <span className="text-[#27B4F5] group-hover:text-black text-sm sm:text-base md:text-xl font-bold transition-colors duration-300">
                   🌙
                 </span>
               )}
@@ -172,7 +174,7 @@ export default function NavBar() {
                 width={44}
                 height={44}
                 onClick={() => setOpenSidebar(true)}
-                className="relative w-11 h-11 cursor-pointer 
+                className="relative w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 cursor-pointer 
                   hover:scale-110 transition-all duration-300
                   drop-shadow-[0_0_10px_rgba(39,180,245,0.4)]
                   group-hover:drop-shadow-[0_0_20px_rgba(39,180,245,0.8)]
@@ -218,7 +220,7 @@ export default function NavBar() {
 
       <div
         className={`
-          fixed top-0 right-0 h-full w-72 z-50
+          fixed top-0 right-0 h-full w-[85vw] sm:w-72 z-50
           transform transition-transform duration-300 ease-out
           ${openSidebar ? "translate-x-0" : "translate-x-full"}
         `}

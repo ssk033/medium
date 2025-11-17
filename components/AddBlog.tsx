@@ -122,24 +122,24 @@ export default function Add({ onClose, onBlogAdded }: AddProps) {
       transition-all duration-300 ${isClosing ? "opacity-0 translate-y-5" : "opacity-100"}`}
     >
       <div
-        className={`relative w-full max-w-2xl p-8 
+        className={`relative w-full max-w-[calc(100%-2rem)] sm:max-w-lg md:max-w-2xl p-4 sm:p-6 md:p-8 
         backdrop-blur-[10px]
         bg-gradient-to-br from-white/95 via-white/90 to-white/95
         dark:from-[#0B0E10]/90 dark:via-[#0B0E10]/85 dark:to-[#0B0E10]/90
-        border border-[#27B4F5]/50 rounded-2xl
+        border border-[#27B4F5]/50 rounded-xl sm:rounded-2xl
         shadow-[0_0_45px_rgba(39,180,245,0.3),inset_0_1px_0_rgba(0,0,0,0.05)]
         dark:shadow-[0_0_45px_rgba(39,180,245,0.6),inset_0_1px_0_rgba(255,255,255,0.1)]
-        transition-all duration-300
+        transition-all duration-300 mx-4
         ${isClosing ? "translate-y-10 opacity-0" : "translate-y-0 opacity-100"}`}
       >
         <button
           onClick={handleClose}
-          className="absolute top-3 right-4 text-[#27B4F5] text-2xl hover:scale-125 hover:text-gray-800 dark:hover:text-white transition"
+          className="absolute top-2 right-3 sm:top-3 sm:right-4 text-[#27B4F5] text-xl sm:text-2xl hover:scale-125 hover:text-gray-800 dark:hover:text-white transition"
         >
           ✖
         </button>
 
-        <div className="text-4xl font-black italic text-center mb-8 text-gray-800 dark:text-white 
+        <div className="text-2xl sm:text-3xl md:text-4xl font-black italic text-center mb-4 sm:mb-6 md:mb-8 text-gray-800 dark:text-white 
           drop-shadow-[0_0_25px_rgba(39,180,245,0.6)]
           group-hover:drop-shadow-[0_0_35px_rgba(39,180,245,0.9)]
           transition-all duration-300">
@@ -151,7 +151,7 @@ export default function Add({ onClose, onBlogAdded }: AddProps) {
           placeholder="Enter title..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-3 bg-gray-100 dark:bg-black/20 backdrop-blur-sm border border-[#27B4F5]/40 text-gray-800 dark:text-white rounded-lg mb-6
+          className="w-full p-2.5 sm:p-3 text-sm sm:text-base bg-gray-100 dark:bg-black/20 backdrop-blur-sm border border-[#27B4F5]/40 text-gray-800 dark:text-white rounded-lg mb-4 sm:mb-6
           focus:border-[#27B4F5] focus:shadow-[0_0_20px_rgba(39,180,245,0.6)] outline-none transition-all duration-300
           placeholder:text-gray-500"
           disabled={loading}
@@ -162,7 +162,7 @@ export default function Add({ onClose, onBlogAdded }: AddProps) {
           value={content}
           onChange={setContent}
           placeholder="Write your content here... (Type @ to mention users)"
-          className="w-full h-40 p-3 bg-gray-100 dark:bg-black/20 backdrop-blur-sm border border-[#27B4F5]/40 text-gray-800 dark:text-white rounded-lg mb-6
+          className="w-full h-32 sm:h-40 p-2.5 sm:p-3 text-sm sm:text-base bg-gray-100 dark:bg-black/20 backdrop-blur-sm border border-[#27B4F5]/40 text-gray-800 dark:text-white rounded-lg mb-4 sm:mb-6
           focus:border-[#27B4F5] focus:shadow-[0_0_20px_rgba(39,180,245,0.6)] outline-none transition-all duration-300
           placeholder:text-gray-500 resize-none"
         />

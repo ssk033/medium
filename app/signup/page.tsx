@@ -42,7 +42,7 @@ export default function SignupPage() {
       {/* Animated grid background pattern */}
       <div
         ref={gridRef}
-        className="absolute inset-0 grid grid-cols-[repeat(18,minmax(0,1fr))] grid-rows-[repeat(12,minmax(0,1fr))] opacity-30 dark:opacity-60"
+        className="absolute inset-0 grid grid-cols-[repeat(12,minmax(0,1fr))] sm:grid-cols-[repeat(15,minmax(0,1fr))] md:grid-cols-[repeat(18,minmax(0,1fr))] grid-rows-[repeat(8,minmax(0,1fr))] sm:grid-rows-[repeat(10,minmax(0,1fr))] md:grid-rows-[repeat(12,minmax(0,1fr))] opacity-30 dark:opacity-60"
       >
         {Array.from({ length: 216 }).map((_, i) => (
           <div

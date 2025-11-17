@@ -60,8 +60,8 @@ export const Blogs = ({ blogs, onBlogDeleted }: BlogsProps) => {
       </div>
 
       {/* LEFT SIDE — BLOGS */}
-      <div className="relative z-10 w-[70%] min-h-screen px-10 py-10 flex flex-col items-center gap-6">
-        <h1 className="text-6xl font-black italic mb-10 
+      <div className="relative z-10 w-full sm:w-[70%] min-h-screen px-3 sm:px-6 md:px-10 py-6 sm:py-8 md:py-10 flex flex-col items-center gap-4 sm:gap-6">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black italic mb-6 sm:mb-8 md:mb-10 
           bg-gradient-to-r from-[#27B4F5] to-[#00eeff]
           bg-clip-text text-transparent
           drop-shadow-[0_0_45px_rgba(39,180,245,0.8)]">
@@ -69,7 +69,7 @@ export const Blogs = ({ blogs, onBlogDeleted }: BlogsProps) => {
         </h1>
 
         {blogs.length === 0 ? (
-          <div className="text-3xl text-gray-500 dark:text-gray-400 italic">No blogs here yet...</div>
+          <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-500 dark:text-gray-400 italic">No blogs here yet...</div>
         ) : (
           blogs.map((blog) => (
             <Blogcard
@@ -93,9 +93,9 @@ export const Blogs = ({ blogs, onBlogDeleted }: BlogsProps) => {
       {commentsOpen && selectedBlog && (
         <div
           className="
-            fixed right-6 top-[110px]
-            w-[380px] max-h-[600px]
-            rounded-2xl p-6 z-[100]
+            fixed right-2 sm:right-4 md:right-6 top-[100px] sm:top-[110px]
+            w-[calc(100%-1rem)] sm:w-[90vw] md:w-[380px] max-w-[380px] max-h-[calc(100vh-120px)] sm:max-h-[600px]
+            rounded-xl sm:rounded-2xl p-4 sm:p-6 z-[100]
             backdrop-blur-[20px]
             bg-gradient-to-br from-white/95 via-white/90 to-white/95
             dark:from-[#0B0E10]/90 dark:via-[#0B0E10]/85 dark:to-[#0B0E10]/90
@@ -134,7 +134,7 @@ export const Blogs = ({ blogs, onBlogDeleted }: BlogsProps) => {
           </div>
 
           {/* COMMENTS LIST (scrollable inside card with proper overflow) */}
-          <div className="max-h-[420px] overflow-y-auto space-y-3 pr-2 
+          <div className="max-h-[300px] sm:max-h-[420px] overflow-y-auto space-y-2 sm:space-y-3 pr-2 
             scrollbar-thin scrollbar-thumb-[#27B4F5]/60 scrollbar-track-transparent
             custom-scrollbar">
             {loadingComments ? (

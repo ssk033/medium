@@ -37,7 +37,7 @@ export default function Signin() {
       {/* Glassmorphic card with neon border effects */}
       <div
         className="
-          relative z-10 p-10 w-[400px] rounded-2xl
+          relative z-10 p-4 sm:p-6 md:p-10 w-[calc(100%-2rem)] sm:w-[90vw] md:w-[400px] max-w-[400px] rounded-xl sm:rounded-2xl mx-4
           bg-gradient-to-br from-white/90 via-white/85 to-white/90
           dark:from-[#0B0E10]/80 dark:via-[#0B0E10]/75 dark:to-[#0B0E10]/80
           backdrop-blur-[20px]
@@ -47,7 +47,7 @@ export default function Signin() {
           hover:shadow-[0_0_70px_rgba(39,180,245,0.5),inset_0_1px_0_rgba(0,0,0,0.1)]
           dark:hover:shadow-[0_0_70px_rgba(39,180,245,1),inset_0_1px_0_rgba(255,255,255,0.15)]
           transition-all duration-500 ease-out
-          before:absolute before:inset-0 before:rounded-2xl
+          before:absolute before:inset-0 before:rounded-xl sm:before:rounded-2xl
           before:bg-gradient-to-br before:from-[#27B4F5]/5 before:via-transparent before:to-transparent
           before:pointer-events-none before:opacity-0 hover:before:opacity-100
           before:transition-opacity before:duration-500
@@ -55,7 +55,7 @@ export default function Signin() {
       >
         {/* Animated title with premium glow */}
         <h2
-          className="text-4xl font-bold text-center mb-6 tracking-[0.10em] text-[#27B4F5]
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 tracking-[0.08em] sm:tracking-[0.10em] text-[#27B4F5]
           drop-shadow-[0_0_20px_#27B4F5,0_0_40px_#27B4F5/50]
           animate-pulse-slow"
         >

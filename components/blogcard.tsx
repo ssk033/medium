@@ -204,7 +204,7 @@ export const Blogcard = ({
         {/* ⭐ Premium Card */}
         <div
           className="
-            border p-7 rounded-2xl
+            border p-3 sm:p-5 md:p-7 rounded-xl sm:rounded-2xl
             backdrop-blur-[10px]
             bg-gradient-to-br from-white/95 via-white/90 to-white/95
             dark:from-[#0B0E10]/90 dark:via-[#0B0E10]/85 dark:to-[#0B0E10]/90
@@ -222,7 +222,7 @@ export const Blogcard = ({
           <div className="flex justify-between items-start relative">
 
             {/* LEFT → AUTHOR */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
               <div
                 ref={profileImageRef}
                 onClick={() => {
@@ -236,7 +236,7 @@ export const Blogcard = ({
                 }}
                 className="
                   relative inline-flex items-center justify-center
-                  w-12 h-12 rounded-full overflow-hidden
+                  w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full overflow-hidden
                   bg-gradient-to-br from-[#27B4F5]/20 to-[#27B4F5]/10
                   ring-2 ring-[#27B4F5]
                   shadow-[0_0_25px_rgba(39,180,245,0.6)]
@@ -254,13 +254,13 @@ export const Blogcard = ({
                     unoptimized={authorImage.startsWith('data:')}
                   />
                 ) : (
-                  <span className="font-semibold text-[#27B4F5] tracking-wide text-sm">
+                  <span className="font-semibold text-[#27B4F5] tracking-wide text-xs sm:text-sm">
                     {authorname ? authorname.slice(0, 2).toUpperCase() : "U"}
                   </span>
                 )}
               </div>
-              <div className="flex items-center gap-3">
-                <div className="text-sm text-gray-600 dark:text-gray-300 font-medium group-hover:text-[#27B4F5] transition-colors">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 md:gap-3">
+                <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium group-hover:text-[#27B4F5] transition-colors">
                   {authorname}
                 </div>
                 {/* Follow Button - Only show if logged in and not own post */}
@@ -269,7 +269,7 @@ export const Blogcard = ({
                     onClick={toggleFollow}
                     disabled={followLoading}
                     className={`
-                      px-3 py-1 text-xs font-semibold rounded-lg border
+                      px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-semibold rounded-lg border
                       transition-all duration-300 ease-out
                       ${
                         followed
@@ -354,7 +354,7 @@ export const Blogcard = ({
           </div>
 
           {/* ================= PREMIUM TITLE ================= */}
-          <h2 className="text-3xl font-bold text-gray-800 dark:text-white mt-5 
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 dark:text-white mt-3 sm:mt-4 md:mt-5 
             group-hover:text-[#27B4F5] 
             drop-shadow-[0_0_10px_rgba(39,180,245,0.3)]
             group-hover:drop-shadow-[0_0_20px_rgba(39,180,245,0.6)]
@@ -363,8 +363,8 @@ export const Blogcard = ({
           </h2>
 
           {/* ================= PREMIUM CONTENT ================= */}
-          <div className="mt-3">
-            <p className={`text-base text-gray-600 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors ${
+          <div className="mt-2 sm:mt-3">
+            <p className={`text-sm sm:text-base text-gray-600 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors ${
               !showFullContent && shouldTruncate ? 'line-clamp-3' : ''
             }`}>
               {content}
@@ -420,17 +420,17 @@ export const Blogcard = ({
           </div>
 
           {/* ================= FOOTER ================= */}
-          <div className="mt-6 flex justify-between items-center">
-            <div className="text-xs text-gray-500 dark:text-gray-500">{today}</div>
+          <div className="mt-4 sm:mt-5 md:mt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
+            <div className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-500">{today}</div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
               {/* ❤️ PREMIUM LIKE */}
               <button
                 onClick={toggleLike}
                 className={`
                   relative overflow-hidden
-                  flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-lg border
-                  transition-all duration-300 ease-out
+                  flex items-center gap-1 sm:gap-2 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded-lg border
+                  transition-all duration-300 ease-out flex-1 sm:flex-initial justify-center
                   ${
                     liked
                       ? "bg-[#27B4F5] text-black shadow-[0_0_20px_rgba(39,180,245,0.8)] border-transparent hover:shadow-[0_0_30px_rgba(39,180,245,1)]"
@@ -439,8 +439,8 @@ export const Blogcard = ({
                   hover:scale-105 active:scale-95
                 `}
               >
-                <span className="relative z-10">
-                  {liked ? "❤️ Liked" : "🤍 Like"} ({likes})
+                <span className="relative z-10 whitespace-nowrap">
+                  {liked ? "❤️" : "🤍"} <span className="hidden sm:inline">{liked ? "Liked" : "Like"}</span> ({likes})
                 </span>
               </button>
 
@@ -449,21 +449,22 @@ export const Blogcard = ({
                 onClick={() => setCommentOpen(true)}
                 className="
                   relative overflow-hidden
-                  flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-lg
+                  flex items-center gap-1 sm:gap-2 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded-lg
                   border border-[#27B4F5]/50 text-gray-700 dark:text-gray-200
                   bg-gray-100 dark:bg-black/20 backdrop-blur-sm
                   hover:bg-[#27B4F5] hover:text-black hover:border-[#27B4F5]
                   hover:shadow-[0_0_20px_rgba(39,180,245,0.6)]
                   transition-all duration-300 ease-out
                   hover:scale-105 active:scale-95
+                  flex-1 sm:flex-initial justify-center
                   before:absolute before:inset-0 before:bg-gradient-to-r
                   before:from-transparent before:via-white/10 before:to-transparent
                   before:translate-x-[-100%] hover:before:translate-x-[100%]
                   before:transition-transform before:duration-700
                 "
               >
-                <Image src="/icons/comment.svg" alt="Comment" width={20} height={20} className="w-5 h-5 relative z-10" />
-                <span className="relative z-10">Comment</span>
+                <Image src="/icons/comment.svg" alt="Comment" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5 relative z-10" />
+                <span className="relative z-10 hidden sm:inline">Comment</span>
               </button>
             </div>
           </div>
