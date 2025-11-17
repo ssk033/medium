@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { FloatingDock } from "@/components/ui/floating-dock";
+import { CometCard } from "@/components/ui/comet-card";
 import { IconBrandGithub, IconBrandX, IconBrandLinkedin } from "@tabler/icons-react";
 
 export default function OurStoryPage() {
@@ -115,90 +116,96 @@ export default function OurStoryPage() {
 
         {/* Story Content */}
         <section className="space-y-8 sm:space-y-10 md:space-y-12">
-          <div className="
-            rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10
-            backdrop-blur-[20px]
-            bg-gradient-to-br from-white/95 via-white/90 to-white/95
-            dark:from-[#0B0E10]/80 dark:via-[#0B0E10]/75 dark:to-[#0B0E10]/80
-            border border-[#27B4F5]/40
-            shadow-[0_0_45px_rgba(39,180,245,0.3),inset_0_1px_0_rgba(0,0,0,0.05)]
-            dark:shadow-[0_0_45px_rgba(39,180,245,0.6),inset_0_1px_0_rgba(255,255,255,0.1)]
-            transition-all duration-500 ease-out
-          ">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#27B4F5] mb-4 sm:mb-6
-              drop-shadow-[0_0_20px_#27B4F5,0_0_40px_#27B4F5/50]">
-              The Beginning
-            </h2>
-            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              ZINGG was born from a simple idea: everyone has a story worth telling. 
-              In a world where content creation has become complex and overwhelming, 
-              we wanted to create a platform that makes sharing your thoughts, ideas, 
-              and experiences as simple and beautiful as possible.
-            </p>
-            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              Our mission is to empower creators, writers, and storytellers to express 
-              themselves freely without the noise and distractions of traditional social media.
-            </p>
-          </div>
+          <CometCard>
+            <div className="
+              rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10
+              backdrop-blur-[20px]
+              bg-gradient-to-br from-white/95 via-white/90 to-white/95
+              dark:from-[#0B0E10]/80 dark:via-[#0B0E10]/75 dark:to-[#0B0E10]/80
+              border border-[#27B4F5]/40
+              shadow-[0_0_45px_rgba(39,180,245,0.3),inset_0_1px_0_rgba(0,0,0,0.05)]
+              dark:shadow-[0_0_45px_rgba(39,180,245,0.6),inset_0_1px_0_rgba(255,255,255,0.1)]
+              transition-all duration-500 ease-out
+            ">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#27B4F5] mb-4 sm:mb-6
+                drop-shadow-[0_0_20px_#27B4F5,0_0_40px_#27B4F5/50]">
+                The Beginning
+              </h2>
+              <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                ZINGG was born from a simple idea: everyone has a story worth telling. 
+                In a world where content creation has become complex and overwhelming, 
+                we wanted to create a platform that makes sharing your thoughts, ideas, 
+                and experiences as simple and beautiful as possible.
+              </p>
+              <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                Our mission is to empower creators, writers, and storytellers to express 
+                themselves freely without the noise and distractions of traditional social media.
+              </p>
+            </div>
+          </CometCard>
 
-          <div className="
-            rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10
-            backdrop-blur-[20px]
-            bg-gradient-to-br from-white/95 via-white/90 to-white/95
-            dark:from-[#0B0E10]/80 dark:via-[#0B0E10]/75 dark:to-[#0B0E10]/80
-            border border-[#27B4F5]/40
-            shadow-[0_0_45px_rgba(39,180,245,0.3),inset_0_1px_0_rgba(0,0,0,0.05)]
-            dark:shadow-[0_0_45px_rgba(39,180,245,0.6),inset_0_1px_0_rgba(255,255,255,0.1)]
-            transition-all duration-500 ease-out
-          ">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#27B4F5] mb-4 sm:mb-6
-              drop-shadow-[0_0_20px_#27B4F5,0_0_40px_#27B4F5/50]">
-              What Makes Us Different
-            </h2>
-            <ul className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300">
-              <li className="flex items-start gap-3">
-                <span className="text-[#27B4F5] text-xl mt-1">✨</span>
-                <span>Clean, minimal interface that puts your content first</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-[#27B4F5] text-xl mt-1">🚀</span>
-                <span>Lightning-fast performance for seamless writing experience</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-[#27B4F5] text-xl mt-1">🎨</span>
-                <span>Beautiful design that adapts to your style</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-[#27B4F5] text-xl mt-1">💬</span>
-                <span>Engage with your community through comments and interactions</span>
-              </li>
-            </ul>
-          </div>
+          <CometCard>
+            <div className="
+              rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10
+              backdrop-blur-[20px]
+              bg-gradient-to-br from-white/95 via-white/90 to-white/95
+              dark:from-[#0B0E10]/80 dark:via-[#0B0E10]/75 dark:to-[#0B0E10]/80
+              border border-[#27B4F5]/40
+              shadow-[0_0_45px_rgba(39,180,245,0.3),inset_0_1px_0_rgba(0,0,0,0.05)]
+              dark:shadow-[0_0_45px_rgba(39,180,245,0.6),inset_0_1px_0_rgba(255,255,255,0.1)]
+              transition-all duration-500 ease-out
+            ">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#27B4F5] mb-4 sm:mb-6
+                drop-shadow-[0_0_20px_#27B4F5,0_0_40px_#27B4F5/50]">
+                What Makes Us Different
+              </h2>
+              <ul className="space-y-4 text-base sm:text-lg text-gray-700 dark:text-gray-300">
+                <li className="flex items-start gap-3">
+                  <span className="text-[#27B4F5] text-xl mt-1">✨</span>
+                  <span>Clean, minimal interface that puts your content first</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#27B4F5] text-xl mt-1">🚀</span>
+                  <span>Lightning-fast performance for seamless writing experience</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#27B4F5] text-xl mt-1">🎨</span>
+                  <span>Beautiful design that adapts to your style</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#27B4F5] text-xl mt-1">💬</span>
+                  <span>Engage with your community through comments and interactions</span>
+                </li>
+              </ul>
+            </div>
+          </CometCard>
 
-          <div className="
-            rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10
-            backdrop-blur-[20px]
-            bg-gradient-to-br from-white/95 via-white/90 to-white/95
-            dark:from-[#0B0E10]/80 dark:via-[#0B0E10]/75 dark:to-[#0B0E10]/80
-            border border-[#27B4F5]/40
-            shadow-[0_0_45px_rgba(39,180,245,0.3),inset_0_1px_0_rgba(0,0,0,0.05)]
-            dark:shadow-[0_0_45px_rgba(39,180,245,0.6),inset_0_1px_0_rgba(255,255,255,0.1)]
-            transition-all duration-500 ease-out
-          ">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#27B4F5] mb-4 sm:mb-6
-              drop-shadow-[0_0_20px_#27B4F5,0_0_40px_#27B4F5/50]">
-              Join Our Journey
-            </h2>
-            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              We&apos;re constantly evolving and improving based on your feedback. 
-              Whether you&apos;re a seasoned writer or just starting out, ZINGG is here 
-              to help you share your voice with the world.
-            </p>
-            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
-              Start your story today and be part of a community that values authentic 
-              expression and meaningful connections.
-            </p>
-          </div>
+          <CometCard>
+            <div className="
+              rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10
+              backdrop-blur-[20px]
+              bg-gradient-to-br from-white/95 via-white/90 to-white/95
+              dark:from-[#0B0E10]/80 dark:via-[#0B0E10]/75 dark:to-[#0B0E10]/80
+              border border-[#27B4F5]/40
+              shadow-[0_0_45px_rgba(39,180,245,0.3),inset_0_1px_0_rgba(0,0,0,0.05)]
+              dark:shadow-[0_0_45px_rgba(39,180,245,0.6),inset_0_1px_0_rgba(255,255,255,0.1)]
+              transition-all duration-500 ease-out
+            ">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#27B4F5] mb-4 sm:mb-6
+                drop-shadow-[0_0_20px_#27B4F5,0_0_40px_#27B4F5/50]">
+                Join Our Journey
+              </h2>
+              <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                We&apos;re constantly evolving and improving based on your feedback. 
+                Whether you&apos;re a seasoned writer or just starting out, ZINGG is here 
+                to help you share your voice with the world.
+              </p>
+              <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
+                Start your story today and be part of a community that values authentic 
+                expression and meaningful connections.
+              </p>
+            </div>
+          </CometCard>
         </section>
       </main>
 
