@@ -82,6 +82,7 @@ export const Blogs = ({ blogs, onBlogDeleted }: BlogsProps) => {
               content={blog.content}
               mediaUrls={blog.mediaUrls || []}
               initialLikes={blog._count.likes}
+              createdAt={blog.createdAt}
               onViewComments={() => loadComments(blog.id)}
               onDeleteBlog={onBlogDeleted}
             />

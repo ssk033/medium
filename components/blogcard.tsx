@@ -16,6 +16,7 @@ interface BlogCardProps {
   content: string;
   initialLikes: number;
   mediaUrls?: string[];
+  createdAt?: string;
   onViewComments: () => void;
   onDeleteBlog?: () => void;
 }
@@ -29,16 +30,23 @@ export const Blogcard = ({
   content,
   initialLikes,
   mediaUrls = [],
+  createdAt,
   onViewComments,
   onDeleteBlog,
 }: BlogCardProps) => {
   const { data: session } = useSession();
   const isAuthor = session?.user?.id && authorId && String(session.user.id) === String(authorId);
-  const today = new Date().toLocaleDateString("en-IN", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
+  const blogDate = createdAt 
+    ? new Date(createdAt).toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })
+    : new Date().toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
 
   const [likes, setLikes] = useState(initialLikes);
   const [liked, setLiked] = useState(false);
@@ -421,7 +429,7 @@ export const Blogcard = ({
 
           {/* ================= FOOTER ================= */}
           <div className="mt-4 sm:mt-5 md:mt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
-            <div className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-500">{today}</div>
+            <div className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-500">{blogDate}</div>
 
             <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
               {/* ❤️ PREMIUM LIKE */}
